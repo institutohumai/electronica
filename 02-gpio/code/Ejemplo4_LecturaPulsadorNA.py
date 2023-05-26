@@ -9,3 +9,4 @@ while True:
     if pulsador.value() == 1:
         print("Presionaste el pulsador!")
         sleep(3)
+        
