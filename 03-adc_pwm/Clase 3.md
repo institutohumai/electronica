@@ -1,32 +1,32 @@
-# Clase N°3: Interacción con el hardware - Parte II: ADC y PWM
+# Clase N°3: Entradas y Salidas analógicas. Convertidor Analógico a Digital (ADC) y Modulación por Ancho de Pulso (PWM)
 
 ![Figura 01 - Presentación Clase N°3](./images/Figura01-PresentacionClaseN°3.jpg)  
 *Figura 01 - Presentación Clase N°3*
 
-En la clase anterior, hemos estado usando las **entradas digitales** de nuestra *RPico*. Es decir, aquellas entradas que solo admiten dos estados; *encendido* o *apagado*, *uno* o *cero*, *3,3[Voltios]* o *0[voltios] (tierra)*. Cuando accionábamos el pulsador NA, el pin *GP* de nuestra *RPico* que se encuentra conectado al pulsador, cambia de *bajo* (*apagado*); a *alto* (*encendido*). Lo mismo ocurre con el *sensor PIR* utilizado; cuando detecta movimiento, envía una señal de *alto* a nuestra placa a través del pin *GP* correspondiente.
+En la clase anterior, hemos usado las **entradas digitales** de nuestra **RPico W**. Es decir, aquellas entradas que solo admiten dos estados; *encendido* o *apagado*, *uno* o *cero*, *3,3[V]* o *0[V] (tierra)*. Cuando accionábamos el pulsador NA, el pin *GP* de nuestra **RPico W** que se encuentra conectado al pulsador, cambia de *bajo* (*apagado*); a *alto* (*encendido*). Lo mismo ocurre en el ejemplo del *sensor PIR* que vimos; cuando detecta movimiento, envía una señal de *alto* a nuestra placa a través del pin *GP* correspondiente.
 
-Pero también hemos utilizado los pines *GP* como salidas, precisamente, como **salidas digitales**, ya que los dispositivos que conectábamos solo admitían dos estados para su funcionamiento. En el caso del *LED*, este podía estar *encendido* (iluminándose con su color correspondiente), o *apagado* (permaneciendo a oscuras). Si volvemos al ejemplo del *zumbador*, notaremos lo mismo; este podía estar emitiendo sonido o permanecer en silencio.
+Pero también hemos utilizado los pines *GP* como salidas, precisamente, como **salidas digitales**, ya que los dispositivos que conectábamos solo admitían dos estados para su funcionamiento. En el caso del *LED*, este podía estar *encendido* (iluminándose con su color correspondiente), o *apagado* (permaneciendo a oscuras). Si volvemos al ejemplo del *buzzer*, notaremos lo mismo; este podía estar emitiendo sonido o permanecer en silencio.
 
-En resumen, todas las señales que hemos manejado hasta ahora, tanto de entrada como de salida, han sido **digitales**. Es decir, señales que solo pueden tomar dos valores, normalmente denotados como *1* o *HIGH*, y *0* o *LOW* (Figura 02). Y como vimos, podemos manejarlas con todos los pines **GP** de la **RPico**. 
+En resumen, todas las señales que hemos manejado hasta ahora, tanto de entrada como de salida, han sido **digitales**. Es decir, señales que solo pueden tomar dos valores, normalmente denotados como *1* o *HIGH*, y *0* o *LOW* (**Figura 02**). Y como vimos, podemos manejarlas con todos los pines **GP** de la **RPico W**. 
 
 ![Figura 02 - Ejemplo de Señal Digital](./images/Figura02-EjemploDeSeñalDigital.jpg)  
 *Figura 02 - Ejemplo de Señal Digital*
 
-Sin embargo, existen muchos otros elementos que pueden tomar *cualquier valor* dentro de unos límites, y no únicamente dos, como ocurre con las **señales digitales**. Si lo que queremos es, por ejemplo, leer la temperatura de un objeto determinado, controlar la intensidad del brillo de un *LED* o la velocidad de giro de un motor, necesitaremos de las **señales analógicas**. Es decir, señales que pueden tomar un rango infinito de valores en un determinado periodo de tiempo (Figura 03). 
+Sin embargo, existen muchos otros elementos que pueden tomar *cualquier valor* dentro de unos límites, y no únicamente dos, como ocurre con las **señales digitales**. Si lo que queremos es, por ejemplo, leer la temperatura de un objeto determinado, controlar la intensidad del brillo de un *LED* o la velocidad de giro de un motor, necesitaremos de las **señales analógicas**. Es decir, señales que pueden tomar un rango infinito de valores en un determinado periodo de tiempo (**Figura 03**). 
 
 ![Figura 03 - Ejemplo de Señal Analógica](./images/Figura03-EjemploDeSeñalAnalógica.jpg)  
 *Figura 03 - Ejemplo de Señal Analógica*
 
-La mayoría de las señales que representan una magnitud física (temperatura, luminosidad, humedad, etc.) son **señales analógicas**, y el microcontrolador **RP2040** de la *RPico* es un circuito *digital* (como todos los microntroladores convencionales que conocemos)... y entonces, ¿cómo hacemos para manipular este tipo de señales? Para resolver esto, emplearemos lo que se conoce como **Conversor Analógico Digital (ADC)**, un dispositivo que se encuentra integrado a nuestra *RPico* que le permite trabajar con este tipo de señales de forma óptima.
-
-![Figura 04 - Ilustración ADC](./images/Figura04-IlustraciónADC.jpg)  
-*Figura 04 - Ilustración ADC*
+La mayoría de las señales que representan una magnitud física (temperatura, luminosidad, humedad, etc.) son **señales analógicas**, y el microcontrolador *RP2040* de la **RPico W** es un *circuito *digital* (como todos los microcontroladores convencionales que conocemos)... y entonces, ¿cómo hacemos para manipular este tipo de señales? Para resolver esto, emplearemos lo que se conoce como **Convertidor Analógico a Digital** (*ADC*, por sus siglas en inglés, *Analogic-to-Digital Converter*), un dispositivo que se encuentra integrado a nuestra **RPico W** que le permite trabajar con este tipo de señales de forma óptima.
 
 Empecemos a conocerlo! 
 
-## 3.1 El Convesor Analógico a Digital (ADC)
+## 3.1 El Convertidor Analógico a Digital (ADC)
 
-Como indica su nombre, un **Convertidor Analógico a Digital (ADC)** toma una señal *analógica* y la transforma a una *digital*. Está integrado dentro del propio **RP2040**, por lo que no es necesario usar un **ADC** externo conectado a una o más de sus entradas digitales.
+Como indica su nombre, un **Convertidor Analógico a Digital** toma una **señal analógica** y la transforma en una **señal digital** (**Figura 04**). Está integrado dentro del propio *RP2040*, por lo que no es necesario usar un **ADC** externo conectado a una o más de sus entradas digitales.
+
+![Figura 04 - Ilustración ADC](./images/Figura04-IlustraciónADC.jpg)  
+*Figura 04 - Ilustración ADC*
 
 Los dos parámetros más importantes de un **ADC** son la *resolución*, y sus *canales*, es decir, cuantas señales analógicas puede aceptar y convertir a la vez.
 
@@ -34,53 +34,60 @@ La *resolución* nos permite establecer el número de niveles en los que se pued
 
 $resolución = \frac{Vref}{(2^n)-1}$
 
-Donde *Vref* es el voltaje de referencia que utiliza el *ADC* de la placa (por defecto es el voltaje de alimentación de la placa, en nuestro caso; 3,3[Voltios]) y *n* es el número de bits del *ADC*. 
+Donde *Vref* es el voltaje de referencia que utiliza el **ADC** de la placa (por defecto es el voltaje de alimentación de la placa, en nuestro caso; 3,3[Voltios]) y *n* es el número de bits del **ADC**. 
 
-Tomemos como ejemplo un **ADC** de 4 bits como el de la Figura 04, con un voltaje de referencia de 15[Voltios]. Su resolución será: 
+Tomemos como ejemplo un **ADC** de 4 bits como el de la **Figura 04**, con un voltaje de referencia de 15[Voltios]. Su resolución será: 
 
 $resolución = \frac{15[Voltios]}{2^{4}-1} = 1[Voltio]$
 
-Esto significa que un cambio de 1[Voltio] en la entrada, causará un cambio de un bit en la salida. Esto se puede ver en la Figura 05.
+Esto significa que un cambio de 1[Voltio] en la entrada, causará un cambio de un bit en la salida; y que variaciones por debajo de 1[Voltio] no serán detectadas por el **ADC**. Esto se puede apreciar en la **Figura 05**.
 
 ![Figura 05 - Entrada y Salida de un ADC de 4 bits](./images/Figura05-EntradaySalidaADC4bits.jpg)  
-*Figura 05 - Entrada y Salida de un ADC  de 4 bits*
+*Figura 05 - Entrada y Salida de un ADC de 4 bits*
 
-Para la *RPico*, que tiene un **ADC** de 12 bits y un voltaje de alimentación de 3,3[Voltios], la resolución será:
+Para la **RPico W**, que tiene un **ADC** de 12 bits y un voltaje de alimentación de 3,3[Voltios], la resolución será:
 
 $resolución = \frac{3,3[Voltios]}{2^{12}-1} = 0,0008058 [Voltios] = 0,8058[mV]$
 
-Lo que significa que podremos medir variaciones de 0,8058[mV] en la señal analógica de entrada. Variaciones por debajo de este voltaje no serán detectados.
+Lo que significa que podremos medir variaciones de 0,8058[mV] en la **señal analógica** de entrada. Variaciones por debajo de este voltaje no serán detectadas.
 
-Además, en el caso de la *RPico*, el valor de 0[Voltios] analógico es expresado en digital como un binario de 12 dígitos de la forma 000000000000 (0 en decimal); y el valor de 3,3[Voltios] analógico es expresado en digital como un binario de 12 dígitos de la forma 111111111111 (4096 en decimal). Por lo tanto, todo valor analógico intermedio es expresado con un valor entre 0 y 4096, es decir, se suma un *1* en binario cada 0,8058[mV] que tengamos en la señal de entrada analógica. 
+Además, en el caso de la **RPico W**, el valor de 0[Voltios] analógico es expresado en digital como un binario de 12 dígitos de la forma 000000000000 (0 en decimal); y el valor de 3,3[Voltios] analógico es expresado en digital como un binario de 12 dígitos de la forma 111111111111 (4095 en decimal). Por lo tanto, todo valor analógico intermedio es expresado con un valor entre 0 y 4095, es decir, se suma un *1* en binario cada 0,8058[mV] que tengamos en la **señal analógica** de entrada.
 
-El **ADC** de nuestra *RPico* tiene una resolución de 12 bits, aunque es muy importante aclarar que ***MicroPython*** transforma este dato a un número de 16 bits (2 bytes). Esto significa que va a transformar una **señal analógica** en una **señal digital**, y que vamos a leerla como un dato entero que va de 0 a 65535. 
+El **ADC** de nuestra **RPico W** tiene una resolución de 12 bits, aunque es muy importante aclarar qué **MicroPython** transforma este dato a un número de 16 bits (2 bytes). Esto significa que va a transformar una **señal analógica** en una **señal digital**, y que vamos a leerla como un dato entero que va de 0 a 65535. 
 
-${2^n} =  {2^{16}} = 65536$    
+Pero, ¿de dónde proviene este rango de números enteros? La respuesta se relaciona con lo expresado anteriormente. 
 
-Pero, ¿por qué 65535 y no 65536? La respuesta se relaciona con lo expresado anteriormente. La *RPico* funciona en un **sistema numérico binario**, donde los únicos valores posibles para un dígito son *0* o *1*. Un número binario de *16 bits* se compone de 16 dígitos y el valor máximo posible es entonces 1111111111111111. Si convertimos este número binario a números decimales (el sistema de conteo 0-9 que usamos los humanos), obtendremos 65536, y como nuestro conteo incluye el *0*, los valores posibles van del *0* al *65535*. En la Figura 06 se muestra la equivalencia entre número de bits, y la cantidad de valores posibles que podemos tomar con ellos.
+La **RPico W** trabaja empleando el **sistema numérico binario**, donde los únicos valores posibles para un dígito son *0* o *1*. Un número binario de *16 bits* se compone de 16 dígitos y el valor máximo posible es entonces 1111111111111111. Si convertimos este número binario a números decimales, obtendremos 65535, y como nuestro conteo incluye el *0*, los valores posibles van del *0* al *65535*, contabilizando un total de 65536 valores posibles que podemos representar. En la **Figura 06** se muestra la equivalencia entre número de bits, y la cantidad de valores posibles que podemos representar con ellos.
 
 ![Figura 06 - Equivalencia Bits-Valores](./images/Figura06-EquivalenciaBits-Valores.jpg)  
 *Figura 06 - Equivalencia Bits-Valores*
 
-En cuanto a los *canales*, la *RPICO* posee tres de ellos, identificados como *ADC0*, *ADC1* y *ADC2*. A nivel hardware, se implementan utilizando los pines *GP26*, *GP27* y *GP28*, que ofrecen una funcionalidad secundaria como entradas de los *ADC*, por lo que se conocen como *GP26_ADC0*, *GP27_ADC1* y *GP28_ADC2* para los canales analógicos *0*, *1* y *2* respectivamente.
+Por otro lado, el *RP2040* posee cinco canales **ADC** en total (**Figura 07**); cuatro de ellos están vinculados a pines *GPIO* del chip: *GP26*, *GP27*, *GP28* y *GP29*, y el quinto canal (*ADC4*) se encuentra conectado a un sensor de temperatura integrado en el *RP2040*, que utilizaremos más adelante en la clase.
 
-También hay un cuarto canal *ADC* en nuestra *RPico* pero que no es accesible a los usuarios. Está conectado a un sensor de temperatura integrado en el **RP2040** y lo utilizaremos más adelante.
+![Figura 07 - Canales ADC del RP2040](./images/Figura07-CanalesADCDelRP2040.jpg)  
+*Figura 07 - Canales ADC del RP2040*
 
-## 3.2 Potenciómetro: definición y partes. Su utilización como divisor de voltaje. Tolerancia. Diferencia entre potenciómetro lineal y logarítmico. 
+Sin embargo, en el pinout de la **RPico W** veremos que solo tres canales son accesibles para conexiones externas, los cuales están identificados como *ADC0*, *ADC1* y *ADC2*. A nivel hardware, se implementan utilizando los pines *GP26*, *GP27* y *GP28*, que ofrecen una funcionalidad secundaria como entradas de los **ADC**, por lo que se conocen como *GP26_ADC0*, *GP27_ADC1* y *GP28_ADC2* para los canales analógicos *0*, *1* y *2* respectivamente.
 
-Para comenzar a utilizar los canales **ADC** necesitamos una señal analógica, y podemos crear una muy fácilmente utilizando un **potenciómetro**. Existen varios tipos de ellos: algunos como los del sensor *PIR HC-SR501* que usamos en la clase anterior, que están diseñados para ajustarse con un destornillador; otros, a menudo utilizados para controles de volumen y luz, tienen perillas o controles deslizantes. El tipo más común tiene una pequeña perilla, que sale de la parte superior o frontal: esto se conoce como **potenciómetro rotatorio** o **potenciómetro giratorio**, y es el que tenemos en nuestro kit. En la Figura 07 se muestran algunos modelos de **potenciómetros**. 
+Esto se debe a que el *GP29* está conectado al pin *VSYS* de la **RPico W** y solo puede ser utilizado para medir voltaje en la placa. En la *Clase N°5* nos detendremos en este pin, y veremos el rol que cumple al momento de dotar de alimentación externa a nuestra **RPico W**. 
 
-![Figura 07 - Tipos de Potenciómetros](./images/Figura07-TiposDePotenciometros.jpg)  
-*Figura 07 - Tipos de Potenciómetros*
+## 3.2 El potenciómetro
 
-Como mencionamos en la Clase N°1, es un dispositivo de *entrada* que puede trabajar de dos formas distintas dependiendo de cómo conectemos las tres patas que posee. Con dos de sus tres patas conectadas, actúa como una resistencia variable, un tipo de resistencia que se puede ajustar en cualquier momento girando la perilla que posee. Y, por otro lado, con las tres patas correctamente cableadas, se convierte en un *divisor de voltaje* y emite desde 0[Voltios] hasta la entrada de voltaje completo que tengamos conectado, según la posición de la perilla.
+Para comenzar a utilizar los canales **ADC** necesitamos una **señal analógica**, y podemos crear una muy fácilmente empleando un **potenciómetro**. Existen varios tipos de ellos: algunos como los del sensor *PIR HC-SR501* que vimos en la clase anterior, diseñados para ajustarse con un destornillador; otros, a menudo utilizados para controles de volumen y luz, con perillas o controles deslizantes. El tipo más común tiene una pequeña perilla, que sale de la parte superior o frontal: este se conoce como **potenciómetro rotatorio** o **potenciómetro giratorio**. En la **Figura 08** se muestran algunos modelos de **potenciómetros**. 
 
-Realicemos nuestro primer ejemplo de la clase. Toma tu **potenciómetro** y verás que tiene tres patas que encajan en la placa de prueba, por lo que comienza insertándolas en ella, teniendo cuidado de no doblarlas. Luego conecta la pata del medio al pin *GP26_ADC0* de la *RPico* usando un cable Dupont M2M, como se muestra en la Figura 08. Por último, toma dos cables Dupont M2M más, y conecta una de las patas externas del potenciómetro, no importa cuál, al riel de alimentación *+* de tu placa de pruebas, y luego conecta el riel de alimentación *+* al pin *3V3* de tu *RPico*.
+![Figura 08 - Tipos de Potenciómetros](./images/Figura08-TiposDePotenciometros.jpg)  
+*Figura 08 - Tipos de Potenciómetros*
 
-![Figura 08 - Potenciómetro como resistencia variable](./images/Figura08-CircuitoEjemploN°7.jpg)  
-*Figura 08 - Potenciómetro como resistencia variable*
+Como mencionamos en la *Clase N°1*, es un dispositivo de *entrada* que puede trabajar de dos formas distintas dependiendo de cómo conectemos las tres patas que posee. Con dos de sus tres patas conectadas, actúa como una *resistencia variable*, un tipo de resistencia que se puede ajustar en cualquier momento girando la perilla que posee. Y, por otro lado, con las tres patas correctamente cableadas, se convierte en un *divisor de voltaje* y emite desde 0[Voltios] hasta la entrada de voltaje completo que tengamos conectado, según la posición de la perilla.
 
-Y ahora a programar. Comencemos por conectar la *RPico* a nuestra computadora, ejecutar *Thonny* y hacer clic en el área de Script para cargar las librerías habituales, incorporando ahora la función *ADC*:
+### 3.2.1 Utilización como resistencia variable
+
+Realicemos nuestro primer ejemplo de la clase. Toma tu **potenciómetro** y verás que tiene tres patas que encajan en la placa de prueba, por lo que comienza insertándolas en ella, teniendo cuidado de no doblarlas. Luego conecta la pata del medio al pin *GP26_ADC0* de la **RPico W** usando un cable Dupont M2M, como se muestra en la **Figura 09**. Por último, toma dos cables Dupont M2M más, y conecta una de las patas externas del potenciómetro, no importa cuál, al riel de alimentación *+* de tu placa de pruebas, y luego conecta el riel de alimentación *+* al pin *3V3* de tu **RPico W**.
+
+![Figura 09 - Potenciómetro como resistencia variable](./images/Figura09-CircuitoEjemploN°7.jpg)  
+*Figura 09 - Potenciómetro como resistencia variable*
+
+Y ahora a programar. Comencemos por conectar la **RPico W** a nuestra computadora, ejecutar **Thonny** y hacer clic en el área de Script para cargar las librerías habituales, incorporando ahora la función *ADC*:
 
 ```python
 from machine import Pin, ADC
@@ -120,43 +127,51 @@ Sin embargo, no importa en qué dirección lo gires, nunca se acercará a 0. Eso
 
 Cuanto mayor sea la resistencia, menos voltaje del pin *3V3* llega a la entrada analógica correspondiente (*GP26_ADC0* en este caso), por lo que el número disminuye. Cuanto menor sea la resistencia, más voltaje llega a su entrada analógica, por lo que el número aumenta.
 
-Un potenciómetro funciona con una tira conductora en el interior, conectada a los dos pines laterales, y un cursor conectado al pin del medio (Figura 09). A medida que gira la perilla, el cursor se acerca a un extremo de la tira y se aleja del otro. Cuanto más se aleje el cursor del extremo de la tira que conectó al pin *3V3* de la *RPico*, mayor será la resistencia; cuanto más se acerque, menor es la resistencia.
+### 3.2.2 Partes
 
-![Figura 09 - Partes de un potenciómetro](./images/Figura09-Partesdeunpotenciometro.jpg)  
-*Figura 09 - Partes de un potenciómetro*
+Un potenciómetro funciona con una tira conductora en el interior, conectada a los dos pines laterales, y un cursor conectado al pin del medio (**Figura 10**). A medida que gira la perilla, el cursor se acerca a un extremo de la tira y se aleja del otro. Cuanto más se aleje el cursor del extremo de la tira que conectó al pin *3V3* de la **RPico W**, mayor será la resistencia; cuanto más se acerque, menor es la resistencia.
+
+![Figura 10 - Partes de un potenciómetro](./images/Figura10-Partesdeunpotenciometro.jpg)  
+*Figura 10 - Partes de un potenciómetro*
+
+### 3.2.3 Utilización como divisor de voltaje: Lectura directa
 
 Los potenciómetros son componentes extremadamente útiles, pero tienen un inconveniente: notarás que no importa cuánto gires la perilla en cualquier dirección, nunca podrás obtener un valor de *0*, o cualquier valor cercano a él. Esto se debe a que una resistencia de 10[kOhmios] no es lo suficientemente fuerte como para reducir la salida del pin *3V3* a 0[Voltios]. Podríamos buscar un potenciómetro más grande con una resistencia máxima más alta, o simplemente podríamos conectar el potenciómetro existente como un **divisor de voltaje**.
 
-¿Cómo utilizamos el potenciómetro como **divisor de voltaje**? Empleando el pin que quedó sin conexión en el circuito de la Figura 08. 
+¿Cómo utilizamos el potenciómetro como **divisor de voltaje**? Empleando el pin que quedó sin conexión en el circuito de la **Figura 09**. 
 
-Tomamos dos cables Dupont M2M; con el primero de ellos conectamos el pin libre del potenciometro a la línea de energización *-* , y con el segundo cerramos el circuito conectando este bus a un pin *GND* de la *RPico* (por ejemplo, el pin físico N°38). El circuito completo quedaría como se muestra en la Figura 10. 
+Tomamos dos cables Dupont M2M; con el primero de ellos conectamos el pin libre del potenciometro a la línea de energización *-* , y con el segundo cerramos el circuito conectando este bus a un pin *GND* de la **RPico W** (por ejemplo, el pin físico N°38). El circuito completo quedaría como se muestra en la **Figura 11**. 
 
-![Figura 10 - Potenciómetro como divisor de voltaje](./images/Figura10-CircuitoEjemploN°7completo.jpg)  
-*Figura 10 - Potenciómetro como divisor de voltaje*
+![Figura 11 - Potenciómetro como divisor de voltaje](./images/Figura11-CircuitoEjemploN°7completo.jpg)  
+*Figura 11 - Potenciómetro como divisor de voltaje*
 
 El código que ejecutaremos es el mismo que realizamos anteriormente (Ver *Ejemplo7_LecturaPotenciometro.py* en el repositorio), ¿pero qué notaremos ahora? Gira la perrilla del potenciómetro nuevamente, completamente en una dirección y luego completamente en la otra. Observa los valores que se imprimen en el área de Shell: a diferencia de antes, ahora van de casi 0 a casi un total de 65535, ¿por qué?
 
 Agregar la conexión a tierra al otro extremo de la tira conductora del potenciómetro ha creado un **divisor de voltaje**: mientras que antes el potenciómetro simplemente actuaba como una resistencia entre el pin *3V3* y el pin de entrada analógica (en este caso el *GP26_ADC0*), ahora **divide** el voltaje entre la salida de 3,3[Voltios] por el pin *3V3* y el 0[Voltios] del pin *GND*. Gira la perilla completamente en una dirección, obtendrás el 100% de los 3,3[Voltios]; gíralo completamente hacia el otro lado, obtendrás el 0% (0 [Voltios]).
 
-Es probablemente que en área de shell no leas exactamente los valores 0 y 65353 cuando gires por completo la perilla del potenciómetro hacia los extremos. Esto no significa que hayas realizado mal el circuito, lo que sucede es que los componentes electrónicos están construidos con una *tolerancia*.
+Es probablemente que en área de Shell no leas exactamente los valores 0 y 65353 cuando gires por completo la perilla del potenciómetro hacia los extremos. Esto no significa que hayas realizado mal el circuito, lo que sucede es que los componentes electrónicos están construidos con una *tolerancia*.
 
-La *tolerancia* de una resistencia eléctrica nos indica, en porcentaje, cuanto puede variar el valor declarado en ella por el fabricante. Esto aplica para resistencias variables como el potenciómetro, como así también para resistencias de valor fijo como las que usamos para los *LEDs*. Valores típicos de *tolerancia* son 5%, 10% y 20%. En nuestro caso, el potenciómetro utilizado posee una tolerancia del 20%, por lo que es muy probable que la entrada analógica de nuestra *RPico* no lea exactamente el 0% o el 100% de los 3,3[Voltios], pero se acercará bastante.
+### 3.2.4 Tolerancia y curva de variación 
 
-Algo importante respecto a los potenciómetros es su *curva de variación*, la cual define como aumenta (y disminuye) la resistencia al girar la perilla. Según esta curva, los potenciómetros se clasifican en *lineales* (identificados con la letra B) y *logarítmicos* (identificados con la letra A).
+La *tolerancia* de una resistencia eléctrica nos indica, en porcentaje, cuanto puede variar el valor declarado en ella por el fabricante. Esto aplica para resistencias variables como el potenciómetro, como así también para resistencias de valor fijo como las que usamos para los *LEDs*. Valores típicos de *tolerancia* son 5%, 10% y 20%. En nuestro caso, el potenciómetro utilizado posee una tolerancia del 20%, por lo que es muy probable que la **entrada analógica** de nuestra **RPico W** no lea exactamente el 0% o el 100% de los 3,3[Voltios], pero se acercará bastante.
 
-![Figura 11 - Potenciómetro Lineal y Logarítmico](./images/Figura11-PotenciometroLinealyLogarítmico.jpg)  
-*Figura 11 - Potenciómetro Lineal y Logarítmico*
+Algo importante respecto a los potenciómetros es su *curva de variación*, la cual define como aumenta (y disminuye) la resistencia al girar la perilla. Según esta curva, los potenciómetros se clasifican en *lineales* (identificados con la letra B) y *logarítmicos* (identificados con la letra A) como se aprecia en la **Figura 12**.
 
-Los lineales varían su resistencia de forma lineal mientras giramos la perilla; así que cuando se encuentre a la mitad del recorrido total, la resistencia efectiva será la mitad de la nominal del potenciómetro. Por el contrario, los logarítmicos varían según una curva logarítmica, y cuando la perilla esté a la mitad del recorrido, la resistencia efectiva es casi la nominal del potenciómetro (Figura 12).
+![Figura 12 - Potenciómetro Lineal y Logarítmico](./images/Figura12-PotenciometroLinealyLogarítmico.jpg)  
+*Figura 12 - Potenciómetro Lineal y Logarítmico*
 
-![Figura 12 - Curvas de variación de los potenciómetros](./images/Figura12-CurvasDeVariaciónDeLosPotenciómetros.jpg)  
-*Figura 12 - Curvas de variación de los potenciómetros*
+Los lineales varían su resistencia de forma lineal mientras giramos la perilla; así que cuando se encuentre a la mitad del recorrido total, la resistencia efectiva será la mitad de la nominal del potenciómetro. Por el contrario, los logarítmicos varían según una curva logarítmica, y cuando la perilla esté a la mitad del recorrido, la resistencia efectiva es casi la nominal del potenciómetro (**Figura 13**).
+
+![Figura 13 - Curvas de variación de los potenciómetros](./images/Figura13-CurvasDeVariaciónDeLosPotenciómetros.jpg)  
+*Figura 13 - Curvas de variación de los potenciómetros*
 
 La utilización de uno u otro dependerá del proyecto que estemos realizando. Por ejemplo; en fuentes de voltaje variable emplearemos los lineales, ya que buscaremos una regulación que se corresponda con el movimiento que le imprimamos a la perilla. Por otro lado, debido a que el oído humano capta las variaciones de vo­lumen con una curva muy parecida a la logarít­mica, es que se utilizan este tipo de potencióme­tros para variar el volumen de nuestros aparatos domésticos.
 
-Con respecto al código, hay una modificación interesante que podemos realizar. El número que se ve impreso en el Shell es una representación decimal de la salida del **ADC** como ya lo explicamos anteriormente, pero no es la forma más "amigable" de verlo. Es más interesante si lo expresamos en términos de voltaje, desde 0[Voltios] a 3,3[Voltios]. ¿Y cómo podemos hacer esto?, con algo que ya hemos visto: ¡utilizando la ecuación de la *resolución*! 
+### 3.2.5 Utilización como divisor de voltaje: Lectura con factor de conversión
 
-Regrese a tu código y agrega la siguiente línea antes del bucle *while*:
+Con respecto al último código que hicimos, hay una modificación interesante que podemos plantear. El número que se ve impreso en el Shell es una representación decimal de la salida del **ADC** como ya lo explicamos anteriormente, pero no es la forma más "amigable" de verlo. Es más interesante si lo expresamos en términos de voltaje, desde 0[Voltios] a 3,3[Voltios]. ¿Y cómo podemos hacer esto?, con algo que ya hemos visto: ¡utilizando la ecuación de la *resolución*! 
+
+Regresa a tu código y agrega la siguiente línea antes del bucle *while*:
 
 ```python
 factor_conversion = 3.3 / (65535)
@@ -183,15 +198,15 @@ Observa los números que se imprimen en el área de Shell: verás que cuando el 
 
 Estos números representan el voltaje real que lee el pin, y a medida que giras la perilla del potenciómetro, estás dividiendo el voltaje suavemente entre el mínimo y el máximo, 0[Voltios] a 3,3[Voltios]. 
 
-¡Felicitaciones! ahora sabes cómo cablear un potenciómetro como resistencia variable y como divisor de voltaje, y además, has aprendido a leer entradas analógicas de forma directa y como voltaje.
+¡Felicitaciones! ahora sabes cómo cablear un potenciómetro como *resistencia variable* y como *divisor de voltaje*, y además, has aprendido a leer **entradas analógicas** de forma directa y como voltaje de entrada.
 
-Si te fijas, has simulando una señal analógica muy similar a la mostrada en la Figura 03, solo que sin el semiciclo negativo que va de 0[Voltios] a -3,3[Voltios], ¿podrías indicar por qué?
+Si te fijas, has simulado una **señal analógica** muy similar a la mostrada en la **Figura 03**, solo que sin el semiciclo negativo que va de 0[Voltios] a -3,3[Voltios], ¿podrías indicar por qué?
 
-## 3.3 Medición de temperatura
+## 3.3 Medición de la temperatura del RP2040
 
-Como mencionamos antes, el **RP2040** de la *RPico* tiene un sensor de temperatura interno, que se lee a través del cuarto canal **ADC** que posee el microcontrolador. Por esta razón, es que este canal no es accesible a los usuarios. Al igual que el potenciómetro, la salida del sensor es un voltaje variable (**señal analógica**): a medida que cambia la temperatura, también lo hace el voltaje. Realizaremos un ejemplo para mostrar su funcionamiento.
+Como mencionamos antes, el *RP2040* de la **RPico W** tiene un sensor de temperatura interno que se lee a través del quinto canal **ADC** que posee el microcontrolador. Y al igual que como ocurre con el potenciómetro conectado como *divisor de voltaje*, la salida de este sensor es un voltaje variable (**señal analógica**): a medida que cambia la temperatura, también lo hace el voltaje. Realizaremos a continuación un ejemplo para mostrar su funcionamiento.
 
-No necesitamos realizar ninguna conexión externa, por lo que pasaremos directamente al código. Como siempre, arrancamos por conectar la *RPico*, ejecutar *Thonny* y hacer clic en el área de Script para cargar las librerías habituales, incorporando ahora también la función *ADC*:
+No necesitamos realizar ninguna conexión externa, por lo que pasaremos directamente al código. Como siempre, arrancamos por conectar la **RPico W**, ejecutar **Thonny** y hacer clic en el área de Script para cargar las librerías habituales, incorporando ahora también la función *ADC*:
 
 ```python
 from machine import Pin, ADC
@@ -220,23 +235,23 @@ Sin embargo, en lugar de imprimir la lectura directamente, debemos realizar una 
 
 Recordemos que un sensor es un dispositivo capaz de detectar magnitudes físicas (temperatura en este caso) y convertirla en una magnitud eléctrica (tensión en este caso), por lo que todos los sensores que utilicemos, nos deben proporcionar una ecuación que relacione la magnitud que está midiendo, con el voltaje que entregará a su salida. Es decir, una ecuación que establezca una **proporcionalidad** entre ambas magnitudes.
 
-Por ejemplo, un sensor de temperatura muy conocido en la electrónica es el **LM35**. En su hoja de datos o datasheet [LM35 Datasheet](https://www.ti.com/lit/ds/symlink/lm35.pdf), puntualmente en la hoja 13, encontraremos esta ecuación: 
+Por ejemplo, un sensor de temperatura muy conocido en la electrónica es el **LM35**. En su hoja de datos o datasheet [LM35 Datasheet](https://www.ti.com/lit/ds/symlink/lm35.pdf), puntualmente en la hoja 13, encontraremos la ecuación que se muestra en la **Figura 14**.
 
-![Figura 13 - Función de transferencia LM35](./images/Figura13-FunciónDeTransferenciaLM35.jpg)  
-*Figura 13 - Función de transferencia LM35*
+![Figura 14 - Función de transferencia LM35](./images/Figura14-FunciónDeTransferenciaLM35.jpg)  
+*Figura 14 - Función de transferencia LM35*
 
-Esto significa que su salida es una **señal analógica de voltaje** (VOUT), y esta es directamente proporcional la temperatura que detecte (T). Puntualmente, mirando la ecuación, vemos que el LM35 proporciona 10[miliVoltios] por cada grado Celsius que detecte (10 mV/°C).
+Esto significa que su salida es una **señal analógica de voltaje** (VOUT), y esta es directamente proporcional la temperatura que detecte (T). Puntualmente, mirando la ecuación, vemos que el **LM35** proporciona 10[miliVoltios] por cada *Grado Celsius* que detecte (10 mV/°C).
 
-A partir de esta información podemos obtener una ecuación matemática que nos relaciona la temperatura medida con el voltaje que nos facilita el LM35, simplemente despejando *T* en la ecuación anterior:
+A partir de esta información podemos obtener una ecuación matemática que nos relacione la temperatura medida (T) con el voltaje que nos facilita el **LM35** (VOUT), simplemente despejando *T* en la ecuación anterior:
 
 $T = \frac{Vout}{10[mV/°C]} $
 
-Para la *RPico*, tenemos esta ecuación en la página 564 del [Datasheet del RP2040](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf):
+Para la **RPico W**, tenemos esta ecuación en la página 565 del [Datasheet del RP2040](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf) y se muestra en la **Figura 15**:
 
-![Figura 14 - Función de transferencia del sensor de temperatura del RP2040](./images/Figura14-FuncióndetransferenciadelsensordetemperaturadelRP2040.jpg)  
-*Figura 14 - Función de transferencia del sensor de temperatura del RP2040*
+![Figura 15 - Función de transferencia del sensor de temperatura del RP2040](./images/Figura15-FuncióndetransferenciadelsensordetemperaturadelRP2040.jpg)  
+*Figura 15 - Función de transferencia del sensor de temperatura del RP2040*
 
-Esta ecuación relaciona la temperatura medida con el dato que nos devuelve el **ADC 4**, ya convertido a valores de voltaje con el factor de conversión que implementamos (por ello la indicación *ADC_voltage* en la fórmula). Llevando esto al código, debemos escribir: 
+Esta ecuación relaciona la temperatura medida con el dato que nos devuelve el *ADC4* ya convertido a valores de voltaje con el *factor de conversión* que implementamos (por ello la indicación *ADC_voltage* en la fórmula). Llevando esto al código, debemos escribir: 
 
 ```python
 temperatura = 27 - (lectura - 0.706)/0.001721
@@ -259,35 +274,35 @@ while True:
     sleep(3)
 ```
 
-Ejecuta el código y presta atención al área de Shell. Verás números impresos que representan la temperatura reportada por el sensor en grados Celsius. 
+Ejecuta el código y presta atención al área de Shell. Verás números impresos que representan la temperatura reportada por el sensor en *Grados Celsius*. 
 
-Felicitaciones, ¡has  logrado monitorear la temperatura de tu *RPico*!
+Felicitaciones, ¡has logrado monitorear la temperatura de tu **RPico W**!
 
 ## 3.4 Modulación por ancho de pulso (PWM): Conceptos básicos y ciclo de trabajo (duty cicle)
 
-Como dijimos anteriormente, la *RPico* no puede trabajar directamente con una **señal analógica**. Debemos convertirla en una **señal digital** mediante el **ADC** para que la *RPico* procese y comprenda los datos. De manera similar, la *RPico* no puede enviar directamente una **señal analógica** para controlar un circuito analógico. Primero debe convertir su **señal digital** en una **señal analógica** de alguna manera. 
+Como dijimos anteriormente, la **RPico W** no puede trabajar directamente con una **señal analógica**. Primero debemos convertirla en una **señal digital** mediante el **ADC** para que la **RPico W** procese y comprenda los datos. De manera similar, la **RPico W** no puede enviar directamente una **señal analógica** para controlar un circuito analógico. Primero debe convertir su **señal digital** en una **señal analógica** de alguna manera. 
 
-Si deseamos ir por el *"camino inverso"* y hacer que un microcontrolador digital cree una salida analógica, normalmente necesitaríamos un **Convertidor de Digital a Analógico (DAC)**. Sin embargo, la *RPico* no cuenta con **DAC** incorporado en su circuitería que le permita llevar a cabo este proceso, ¿entonces cómo hacemos?
+Si deseamos ir por el *"camino inverso"* y hacer que un microcontrolador digital cree una **salida analógica**, normalmente necesitaríamos un **Convertidor Digital a Analógico** (*DAC*, por sus siglas en inglés, *Digital-to-Analogic Converter*). Sin embargo, la **RPico W** no cuenta con un **DAC** incorporado en su circuitería que le permita llevar a cabo este proceso, ¿entonces cómo hacemos?
 
-Existe una manera de "falsificar" una **señal analógica**, usando algo llamado **Modulación por Ancho de Pulso** o **PWM** (en inglés, *Pulse Width Modulation*). Entonces, cuando la *RPico* necesita emitir una señal analógica, necesita usar otro método para controlar el circuito analógico: **PWM**.
+Existe una manera de "falsificar" una **señal analógica**, empleando algo llamado **Modulación por Ancho de Pulso** (*PWM*, por sus siglas en inglés, *Pulse Width Modulation*). Entonces, cuando la **RPico W** necesita emitir una **señal analógica**, emplea otro método para controlar el circuito analógico: **PWM**.
 
-La **salida digital** de un microcontrolador solo puede estar *encendida* o *apagada*, *0* o *1*. Encender y apagar una **salida digital** se conoce como **pulso**, y al alterar la rapidez con que el pin se enciende y apaga, se puede cambiar o modular el **ancho** de estos **pulsos**, por ello el nombre **Modulación por Ancho de Pulso**.
+La **salida digital** de un microcontrolador solo puede estar *encendida* o *apagada*, *0* o *1*. Encender y apagar una **salida digital** se conoce como *pulso*, y al alterar la rapidez con que el pin se enciende y apaga, se puede cambiar o *modular* el *ancho* de estos *pulsos*, por ello el nombre **Modulación por Ancho de Pulso**.
 
 Cuando hablamos de "pulso" nos referimos a la **señal de pulso**, que es una **señal digital** enviada en patrones periódicos continuos de encendido y apagado por el microcontrolador. Debido a que la señal enviada solo tiene dos estados, *encendido* y *apagado*, la señal cambia solo entre *nivel alto* y *nivel bajo*. 
 
-La señal **PWM** se define principalmente por tres componentes: *ciclo*, *ciclo de trabajo* y *frecuencia*. Como se muestra en la Figura 15, el *ciclo (T)* es el tiempo total para que una señal de pulso pase por un *estado de nivel alto (T1)* y un *estado de nivel bajo (T2)*, es decir, *ciclo (T) = T1 + T2*. 
+La señal **PWM** se define principalmente por tres componentes: *ciclo*, *ciclo de trabajo* y *frecuencia*. Como se muestra en la **Figura 16**, el *ciclo (T)* es el tiempo total para que una señal de pulso pase por un *estado de nivel alto (T1)* y un *estado de nivel bajo (T2)*, es decir, *ciclo (T) = T1 + T2*. 
 
-![Figura 15 - Señal PWM](./images/Figura15-SeñalPWM.jpg)  
-*Figura 15 - Señal PWM*
+![Figura 16 - Señal PWM](./images/Figura16-SeñalPWM.jpg)  
+*Figura 16 - Señal PWM*
 
 El *ciclo de trabajo* o *Duty Cicle* representa la relación entre el tiempo en que la señal está en un nivel alto (T1) y el ciclo completo de la señal (T). Es una relación porcentual y se puede calcular como: 
 
 $\text{Ciclo de Trabajo (o Duty Cicle)}  = \frac{T1}{T}$
 
-Por ejemplo, un *Duty Cycle* de 10% indica que la señal permanece en un estado alto (T1) el 10% de su ciclo completo (T). En la Figura 16 se muestran más ejemplos de este concepto.
+Por ejemplo, un *Duty Cycle* de 10% indica que la señal permanece en un estado alto (T1) el 10% de su ciclo completo (T). En la **Figura 17** se muestran más ejemplos de este concepto.
 
-![Figura 16 - Ejemplos de  Duty Cicle](./images/Figura16-EjemplosdeDutyCicle.jpg)  
-*Figura 16 - Ejemplos de  Duty Cicle*
+![Figura 17 - Ejemplos de Duty Cicle](./images/Figura17-EjemplosdeDutyCicle.jpg)  
+*Figura 17 - Ejemplos de Duty Cicle*
 
 Por su parte, la *frecuencia* representa el número de ciclos por segundo, su unidad es el *Hertzio* - *[Hz]* y calcula de la siguiente manera:
 
@@ -295,65 +310,65 @@ $\text{f}  = \frac{1}{T}$
 
 Por ejemplo, una frecuencia de 1000[Hz] significa 1000 ciclos por segundo. Cuanto más corto es el ciclo, mayor es la frecuencia.
 
-El objetivo de una señal **PWM** es cambiar el ciclo de trabajo como se observa en los ejemplos de la Figura 16, sin cambiar otros parámetros de la señal de pulso como la frecuencia y los valores de tensión (que son 3,3[V] y 0[V] en todo momento), para "disfrazar" una **señal digital** como una **señal analógica** de voltaje constante.
+El objetivo de una señal **PWM** es cambiar el *ciclo de trabajo* como se observa en los ejemplos de la **Figura 17**, sin cambiar otros parámetros de la señal de pulso como la frecuencia y los valores de tensión (que son 3,3[V] y 0[V] en todo momento), para "disfrazar" una **señal digital** como una **señal analógica** de voltaje constante.
 
-## 3.5 Control de brillo automático con PWM 
+## 3.5 Control automático del brillo de un LED con PWM 
 
-Para comprender los últimos conceptos y ver su aplicación, tomemos como ejemplo un *LED*. En las conexiones de la clase pasada, cuando utilizábamos los pines *GP* como salidas de **señal digital**, solo podíamos cambiar el valor de salida entre *1* y *0*, es decir, *encender* o *apagar* el LED.
+Para comprender los últimos conceptos y ver su aplicación, tomemos como ejemplo un *LED*. En las conexiones de la clase pasada, cuando utilizábamos los pines *GP* como salidas de **señal digital**, solo podíamos cambiar el valor de salida entre *1* y *0*, es decir, *encender* o *apagar* el *LED*.
 
 No podemos controlar el brillo del *LED*, y mucho menos realizar cualquier otro efecto. Para poder realizar esto, necesitamos usar **señales analógicas** para la salida, y aquí es cuando **PWM** toma un papel crucial.
 
-Cuando ingresamos una señal **PWM** al *LED*, el *LED* en realidad recibe una **señal digital** que cambia constantemente entre *nivel alto* y *nivel bajo*. Esta señal digital hace que el *LED* se encienda y apague constantemente. Cuando la frecuencia de encendido y apagado es lo suficientemente rápida, es decir, la frecuencia de la señal **PWM** es lo suficientemente alta, los ojos humanos no reconocerán este destello de luz.
+Cuando ingresamos una señal **PWM** al *LED*, el *LED* en realidad recibe una **señal digital** que cambia constantemente entre *nivel alto* y *nivel bajo*. Esta **señal digital** hace que el *LED* se encienda y apague constantemente. Cuando la frecuencia de encendido y apagado es lo suficientemente rápida, es decir, la frecuencia de la señal **PWM** es lo suficientemente alta, los ojos humanos no reconocerán este destello de luz.
 
-Ahora, si cambiamos cambiar la relación del tiempo en que el *LED* está encendido en relación con el tiempo en que está apagado (sin modificar la frecuencia), nuestra señal **PWM** nos permitirá modificar el brillo del *LED*. Es decir que, debemos ajustar el *ciclo de trabajo* de nuestra señal **PWM** para modificar el brillo del *LED*.
+Ahora, si cambiamos la relación del tiempo en que el *LED* está encendido en relación con el tiempo en que está apagado (sin modificar la frecuencia), nuestra señal **PWM** nos permitirá modificar el brillo del *LED*. Es decir que, debemos ajustar el *ciclo de trabajo* de nuestra señal **PWM** para modificar el brillo del *LED*.
 
-Incorporemos un ejemplo numérico como el que muestra en la Figura 17. Si el *LED* se enciende durante 0,5[ms] (T1) y se apaga durante 0,5[ms] (T2), no notarás que la luz parpadea porque la frecuencia es demasiado rápida. En cambio, observarás que el brillo del *LED* se reducido a la mitad de su estado "siempre encendido". Por otro lado, cuando la luz se enciende en 0,1[ms] y se apaga en 0,9[ms], la luz percibida por tus ojos será solo una décima parte de su brillo original, y tampoco notarás el parpadeo. 
+Incorporemos un ejemplo numérico como el que muestra en la **Figura 18**. Si el *LED* se enciende durante 0,5[ms] (T1) y se apaga durante 0,5[ms] (T2), no notarás que la luz parpadea porque la frecuencia es demasiado rápida. En cambio, observarás que el brillo del *LED* se reducido a la mitad de su estado "siempre encendido". Por otro lado, cuando la luz se enciende en 0,1[ms] y se apaga en 0,9[ms], la luz percibida por tus ojos será solo una décima parte de su brillo original, y tampoco notarás el parpadeo. 
 
-![Figura 17 - Ejemplo de control de brillo de un LED](./images/Figura17-EjemplodeControldeBrillodeunLED.jpg)  
-*Figura 17 - Ejemplo de control de brillo de un LED*
+![Figura 18 - Ejemplo de control de brillo de un LED](./images/Figura18-EjemplodeControldeBrillodeunLED.jpg)  
+*Figura 18 - Ejemplo de control de brillo de un LED*
 
 En ambos ejemplos, no hemos modificado el *ciclo* (y por ende tampoco la frecuencia) de la señal **PWM**, solo hemos trabajado sobre su **ciclo de trabajo**:
 
-$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,5[ms]+0,5[ms]} = \frac{1}{1[ms]} = 1000[Hz] -\text{Ciclo de Trabajo}  = \frac{T1}{T} = \frac{0,5[ms]}{1[ms]} = {50 \text{ porciento}}$
+$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,5[ms]+0,5[ms]} = \frac{1}{1[ms]} = 1000[Hz] -\text{Ciclo de Trabajo}  = \frac{T1}{T} = \frac{0,5[ms]}{1[ms]} = \text{50}$%  
 
-$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,1ms]+0,9[ms]} = \frac{1}{1[ms]} = 1000[Hz] -\text{Ciclo de Trabajo}  = \frac{T1}{T} = \frac{0,1[ms]}{1[ms]} = {10 \text{ porciento}}$
+$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,1ms]+0,9[ms]} = \frac{1}{1[ms]} = 1000[Hz] -\text{Ciclo de Trabajo}  = \frac{T1}{T} = \frac{0,1[ms]}{1[ms]} = \text{10}$%    
 
 Esta modulación es empleada para controlar la cantidad de energía que se envía a un dispositivo. Es una técnica muy utilizada para regular la velocidad de giro de los motores y como regulación de intensidad lumínica como en el ejemplo.
 
-La mayoría de los sistemas embebidos, no son capaces de proporcionar una **salida analógica** y sólo pueden proporcionar una **salida digital**. Entonces, para conseguir una **señal analógica**, la mayoría de ellos utiliza **PWM**.
+La mayoría de los **sistemas embebidos**, no son capaces de proporcionar una **salida analógica** y sólo pueden proporcionar una **salida digital**. Entonces, para conseguir una **señal analógica**, la mayoría de ellos utiliza **PWM**.
 
-En nuestra *RPico* cada pin *GP* es capaz de proporcionar una señal **PWM**, pero trabajando de a bloques (que contabilizan un total de 8) donde cada uno de ellos proporciona dos salidas (A y B). Observemos la Figura 18; verás que cada pin tiene una letra y un número. El número representa el bloque **PWM** conectado a ese pin; la letra representa qué salida del bloque se utiliza.
+En nuestra **RPico W** cada pin *GP* es capaz de proporcionar una señal **PWM**, pero trabajando de a bloques (que contabilizan un total de 8) donde cada uno de ellos proporciona dos salidas (A y B). Observemos la **Figura 19**; verás que cada pin tiene una letra y un número. El número representa el bloque **PWM** conectado a ese pin; la letra representa qué salida del bloque se utiliza.
 
-![Figura 18 - Pines PWM de la RPico](./images/Figura18-PinesPWMdelaRPico.jpg)  
-*Figura 18 - Pines PWM de la RPico*
+![Figura 19 - Pines PWM de la RPico](./images/Figura19-PinesPWMdelaRPico.jpg)  
+*Figura 19 - Pines PWM de la RPico*
 
 Esto puede sonar confuso, por lo que es necesario detallarlo. En nuestras conexiones, debemos chequear los bloques **PWM** que estemos utilizando, asegurándonos de conectar solo los pines con una combinación de letras y números *que no coincidan*.
 
-Por ejemplo, si estámos utilizando *PWM_A[0]* en el pin *GP0* y *PWM_B[0]* en el pin *GP1*, todo funcionará bien y seguirá funcionando si agrega *PWM_A[1]* en el pin *GP2*. Sin embargo, si intentamos usar el canal **PWM** en el pin *GP0* y el pin *GP16*, tendrá problemas ya que ambos están conectados a *PWM_A[0]*.
+Por ejemplo, si estámos utilizando el *PWM_A[0]* del pin *GP0* y el *PWM_B[0]* del *GP1*, todo funcionará bien y seguirá funcionando si empleamos el *PWM_A[1]* del *GP2*. Sin embargo, si intentamos usar el canal **PWM** del pin *GP0* y del pin *GP16*, tendremos problemas ya que ambos están conectados a *PWM_A[0]*.
 
-Sabremos si accidentalmente usamos la misma salida **PWM** dos veces, porque cada vez que modifiquemos los valores **PWM** en un pin, también afectaremos al otro pin. Si esto sucede, miremos el diagrama de pines de la Figura 18 y usemos una salida **PWM** que se encuentre libre.
+Sabremos si accidentalmente usamos la misma salida **PWM** dos veces, porque cada vez que modifiquemos los valores **PWM** en un pin, también afectaremos al otro pin. Si esto sucede, observaremos el diagrama de pines de la **Figura 19** y usaremos una salida **PWM** que se encuentre libre.
 
 Y ahora, con estas indicaciones, realicemos un ejemplo práctico. Puntualmente, controlaremos el brillo de un *LED* de forma gradual y automática, algo conocido como *"breathing LED"*. El brillo del *LED* cambiará de oscuro a claro y luego de claro a oscuro. 
 
-Comencemos por repetir el conexionado del Ejemplo N°3 (que ahora llamaremos Ejemplo N°10). 
+Comencemos por repetir el conexionado del *Ejemplo N°3* de la clase pasada (que ahora llamaremos *Ejemplo N°10*),y que mostramos en la **Figura 20**  
 
-![Figura 19 - Circuito Ejemplo N°10](./images/Figura19-CircuitoEjemploN°10.jpg)  
-*Figura 19 - Circuito Ejemplo N°10*
+![Figura 20 - Circuito Ejemplo N°10](./images/Figura20-CircuitoEjemploN°10.jpg)  
+*Figura 20 - Circuito Ejemplo N°10*
 
-Luego conectamos la *RPico*, ejecutamos *Thonny* y hacemos clic en el área de Script para cargar las librerías habituales, incorporando ahora también la función *PWM*:
+Luego conectamos la **RPico W**, ejecutamos **Thonny** y hacemos clic en el área de Script para cargar las librerías habituales, incorporando ahora también la función *PWM*:
 
 ```python
 from machine import Pin, PWM
 from utime import sleep
 ```
 
-Al igual que al configurar el **ADC**, debemos indicar el bloque **PWM** que utilizaremos, refiriéndonos al pin *GP* al momento de realizar la definición. En este caso, mirando la Figura 18, la definición correcta queda de la siguiente manera:
+Al igual que al configurar el **ADC**, debemos indicar el bloque **PWM** que utilizaremos, refiriéndonos al pin *GP* al momento de realizar la definición. En este caso, mirando la **Figura 19**, la definición correcta queda de la siguiente manera:
 
 ```python
 LED_PWM = PWM(Pin(15))
 ```
 
-Esto crea un objeto *LED* en el pin *GP15*, pero con una diferencia: activa la salida de **PWM** en el pin, puntualmente el bloque B[7].
+Esto crea un objeto *LED* en el pin *GP15*, pero con una diferencia: activa la salida de **PWM** en el pin, puntualmente el bloque *B[7]*.
 
 También debemos configurar la *frecuencia* de nuestra señal **PWM**. Para ello, utilizaremos el método *freq()* de la siguiente manera:
 
@@ -361,13 +376,13 @@ También debemos configurar la *frecuencia* de nuestra señal **PWM**. Para ello
 LED_PWM.freq(1000)
 ```
 
-En la *RPico* la frecuencia puede tener un valor entre 7 y 125000000 (7[Hz] y 125[MHz]), cuya elección depende de la aplicación que estemos realizando. Es muy importante elegir la frecuencia adecuada. Si la frecuencia es muy baja, el parpadeo del *LED* durante el encendido y el apagado será visible a simple vista y se producirá de forma intermitente. Si la frecuencia es muy alta, hará que el *LED* no pueda trabajar de forma correcta, lo que afectará la estabilidad.
+En la **RPico W** la frecuencia puede tomar un valor entre 7 y 125000000 (7[Hz] y 125[MHz]), cuya elección depende de la aplicación que estemos realizando. Es muy importante elegir la frecuencia adecuada. Si la frecuencia es muy baja, el parpadeo del *LED* durante el encendido y el apagado será visible a simple vista y se producirá de forma intermitente. Si la frecuencia es muy alta, hará que el *LED* no pueda trabajar de forma correcta, lo que afectará la estabilidad.
 
 Para controlar el brillo del *LED*, podemos utilizar 1000[Hz] sin inconvenientes, ya que el ojo humano es incapaz de detectar estos cambios tan rápidos. El efecto percibido es que el *LED* brilla con menor intensidad, aunque en realidad se está apagando y encendiendo muy rápido.
 
 En otras aplicaciones más complejas, como por ejemplo el control de velocidad de un motor, este valor de frecuencia **PWM** dependerá del motor en particular que utilicemos.
 
-A través del análisis, podemos deducir que un *"breathing LED"* se compone de dos partes. En la primera parte, el *LED* se enciende gradualmente desde el estado tenue, hasta que el brillo alcance su valor máximo. En la segunda parte, el brillo del LED comenzará a decaer desde su valor máximo hasta apagarse. Repitiendo estas dos partes en alternancia, podemos darnos cuenta del efecto de una luz que "respira".
+A través del análisis, podemos deducir que un *"breathing LED"* se compone de dos partes. En la primera parte, el *LED* se enciende gradualmente desde el estado tenue, hasta que el brillo alcance su valor máximo. En la segunda parte, el brillo del *LED* comenzará a decaer desde su valor máximo hasta apagarse. Repitiendo estas dos partes en alternancia, podemos darnos cuenta del efecto de una luz que "respira".
 
 Podemos usar dos bucles *while* para darnos cuenta de los efectos de estas dos partes. Primero, configuramos una variable "val" para ayudarnos a ajustar el ciclo de trabajo de la señal **PWM**. Al comienzo del programa, establecemos val en 0:
 
@@ -386,7 +401,7 @@ while val<65535:
 
 Anteriormente utilizamos *read_u16()* para *leer* el valor del **ADC**, en este caso utilizamos "duty_u16()" para *escribir* el valor del ciclo de trabajo de nuestra **PWM**. Al igual que antes, esta última parte, *u16*, le indica el tipo de dato que recibirá. En este caso, un número entero sin signo entre 0 (indicando un ciclo de trabajo del 0%) y 65535 (indicando un ciclo de trabajo del 100%).
 
-En este programa incrementamos el valor de *val* en 50 cada 50[ms] hasta que sea mayor a 65535, y usamos la función “duty_u16” para ajustar el ciclo de trabajo de la señal **PWM** usando este mismo valor.
+En este programa incrementamos el valor de *val* en 50 cada 50[ms] (ambos valores pueden ajustarse a voluntad) hasta que sea mayor a 65535, y usamos la función “duty_u16” para ajustar el ciclo de trabajo de la señal **PWM** usando este mismo valor.
 
 Cuando el valor de "val" es mayor que 65535, nuestro código saldrá del primer bucle *while* y entrará en el siguiente bucle *while*. De manera similar, para que la luz se atenúe gradualmente, seguimos disminuyendo el valor de *val* hasta que sea 0.
 
@@ -422,16 +437,16 @@ while True:
         print(val)
 ```
 
-¡Ejecuta el programa y habrás realizado tu primer control automático de una señal analógica!
+¡Ejecuta el programa y habrás realizado tu primer sistema de control automático de una **señal analógica**!
 
-## 3.6 Nuestro primer sistema de control: Regulación de brillo con ADC y PWM
+## 3.6 Control regulable del brillo de un LED con ADC y PWM
 
-Como tema final de la clase, vamos a realizar un ejemplo que aplique todo lo que hemos visto. Puntualmente, vamos a controlar el brillo de un *LED* con la ayuda de una señal **PWM** cuya regulación proviene de un potenciómetro, del cual tomaremos su valor gracias a uno de los **ADC** que posee la *RPico*.
+Como tema final de la clase, vamos a realizar un ejemplo que aplique todo lo que hemos visto. Puntualmente, vamos a controlar el brillo de un *LED* con la ayuda de una señal **PWM** cuya regulación proviene de un potenciómetro, del cual tomaremos su valor gracias a uno de los **ADC** que posee la **RPico W**.
 
-Para ello, combinaremos los circuitos de las Figuras 08 y 19, quedando un circuito como el que se muestra en la Figura 20.
+Para ello, combinaremos los circuitos de la **Figura 09** y de la **Figura 20**, quedando un circuito como el que se muestra en la **Figura 21**.
 
-![Figura 20 - Circuito Ejemplo N°11](./images/Figura20-CircuitoEjemploN°11.jpg)  
-*Figura 20 - Circuito Ejemplo N°11*
+![Figura 21 - Circuito Ejemplo N°11](./images/Figura21-CircuitoEjemploN°11.jpg)  
+*Figura 21 - Circuito Ejemplo N°11*
 
 Lo que haremos entonces, es usar el valor que nos retorna el canal **ADC** que está conectado al potenciómetro, y usar este mismo valor para controlar el ciclo de trabajo de la señal **PWM**, modificando así, el brillo del *LED*.
 
@@ -456,14 +471,14 @@ Antes de ejecuta el código, nos detendremos en la siguiente línea:
 ```python
 LED_PWM.duty_u16(val)
 ```
-Esta línea toma la lectura sin procesar del **ADC** conectado a tu potenciómetro, y luego la usa para modificar el *ciclo de trabajo*. 
+Esta línea toma la lectura sin procesar del *ADC* conectado a tu potenciómetro, y luego la usa para modificar el *ciclo de trabajo*. 
 
-Como vimos, el *ciclo de trabajo* controla la salida del pin **PWM**. Un *ciclo de trabajo* del 0% deja el pin apagado para los 1000 pulsos por segundo de la señal **PWM** (imagen superior de la Figura 16) y apaga efectivamente el pin. Por otro lado, un *ciclo de trabajo* del 100% deja el pin encendido para los 1000 pulsos por segundo y es funcionalmente equivalente a simplemente encender el pin como una salida digital fija (imagen inferior de la Figura 16). Un caso intermedio, sería un ciclo de trabajo del 50%, el cual tiene el pin encendido durante una mitad de los pulsos y apagado durante la otra mitad de los pulsos (imagen central de la Figura 16).
+Como vimos, el *ciclo de trabajo* controla la salida del pin **PWM**. Un *ciclo de trabajo* del 0% deja el pin apagado para los 1000 pulsos por segundo de la señal **PWM** (imagen superior de la **Figura 17**) y apaga efectivamente el pin. Por otro lado, un *ciclo de trabajo* del 100% deja el pin encendido para los 1000 pulsos por segundo y es funcionalmente equivalente a simplemente encender el pin como una salida digital fija (imagen inferior de la **Figura 17**). Un caso intermedio, sería un ciclo de trabajo del 50%, el cual tiene el pin encendido durante una mitad de los pulsos y apagado durante la otra mitad de los pulsos (imagen central de la **Figura 17**).
 
 Ahora sí, ejecuta el código y gira el potenciómetro completamente en un sentido y luego completamente en el otro. Observa el *LED*: a menos que esté usando un potenciómetro logarítmico, verás que el brillo del *LED* cambia suavemente desde completamente apagado en un extremo del límite de la perilla del potenciómetro hasta completamente iluminado en el otro.
 
 Esto se debe a que la lectura tomada del pin analógico conectado al potenciómetro se convierte en un valor para el ciclo de trabajo de la señal **PWM**: un ciclo de trabajo bajo es como un voltaje bajo en una **salida analógica**, lo que hace que el *LED* se atenúe; un ciclo de trabajo alto es como un alto voltaje, lo que hace que el *LED* brille.
 
-Además, no necesitamos hacer ninguna conversión de datos; el mismo formato que recibe del pin de **entrada analógica** de la *RPico*, se lo estamos pasando como valor del ciclo de trabajo al **PWM**: un número entero de 16 bits sin signo - *u16*.
+Además, no necesitamos hacer ninguna conversión de datos; el mismo formato que recibe del pin de **entrada analógica** de la **RPico W**, se lo estamos pasando como valor del ciclo de trabajo al **PWM**: un número entero de 16 bits sin signo - *u16*.
 
 ¡Felicitaciones, no solo has dominado las **entradas analógicas**, sino que ahora puedes crear el equivalente a una **salida analógica** usando **Modulación por Ancho de Pulso**!

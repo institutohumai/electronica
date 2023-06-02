@@ -8,3 +8,4 @@ potenciometro = ADC(26)
 while True:
     print(potenciometro.read_u16())
     sleep(5)
+    
