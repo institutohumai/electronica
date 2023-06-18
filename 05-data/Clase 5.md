@@ -225,9 +225,9 @@ Como desafío; ¿se animan a registrar los datos provenientes de un potenciómet
 
 Por último, una advertencia importante. El *Sistema de Archivos* de la **RPico W** tiene un tamaño de 128 kB, lo que significa que puede contener alrededor de 128.000 bytes de datos. Cada archivo que guardemos en nuestra placa, incluido el archivo de almacenamiento que genera nuestro *registrador de datos*, ocupa espacio. 
 
-El tiempo que se tarde en llenar el almacenamiento, dependerá de cuántos otros archivos tengamos alojados, y del tamaño de los datos y de la frecuencia a la cual nuestro *registrador de datos* guarde una lectura.
+El tiempo que se tarde en llenar el almacenamiento, dependerá de cuántos otros archivos tengamos alojados, y del tamaño y de la frecuencia a la cual nuestro *registrador de datos* guarde un dato.
 
-Por ejemplo; a nueve bytes por lectura cada diez segundos, llenaremos 128 kB en poco menos de 40 horas. Si en cambio, hiciéramos una lectura por minuto, el *registrador de datos* podría funcionar durante casi diez días. Y si solo lee una vez por hora, podría funcionar durante más de un año y medio.
+Por ejemplo; a nueve bytes por escritura cada diez segundos, llenaremos 128 kB en poco menos de 40 horas. Si en cambio, hiciéramos una escritura por minuto, el *registrador de datos* podría funcionar durante casi diez días. Y si solo escribe una vez por hora, podría funcionar durante más de un año y medio.
 
 Una alternativa, es comunicar los datos a una plataforma web y allí almacenar los datos, , independizándonos de la limitación de espacio de la **RPico W**. Esto lo realizaremos más adelante.
 
@@ -307,8 +307,6 @@ Un *diodo Schottky* es un tipo de diodo semiconductor ampliamente utilizado en a
 
 En el caso específico de la **RPico W**, el *diodo Schottky* se utiliza para proporcionar *protección contra polaridad inversa*. Esto impide posibles daños en los circuitos de la placa debido a la conexión incorrecta de la polaridad de la fuente de alimentación o a una inversión accidental de la tensión. El *diodo Schottky* actúa como una barrera que evita que la corriente fluya en la dirección incorrecta, protegiendo así los componentes sensibles de la placa.
 
-Sin embargo, lo más importante aquí, es que mediante este pin también podemos proporcionar alimentación externa a nuestra placa en un rango de voltaje que va desde 1,8[Voltios] hasta 5,5[Voltios] gracias a que cuenta con un *regulador de tensión interno*, que se encarga de garantizar que el *RP2040* recibirá los 3,3[Voltios] necesarios para su funcionamiento. 
-
 Sin embargo, lo más importante aquí, es que este pin nos permite suministrar alimentación externa a la placa en un rango de voltaje de 1,8[V] a 5,5[V], gracias a que se encuentra conectado al regulador de tensión *RT6154* de la firma *Richtek*, el cual nos garantiza que el *RP2040* recibirá los 3,3[V] necesarios para su correcto funcionamiento.
 
 Esto nos proporciona una amplia variedad de opciones para las fuentes de alimentación externas que deseemos utilizar, empleando únicamente los pines *VSYS* y *GND* de nuestra **RPico W**. 
@@ -320,7 +318,7 @@ Una opción adecuada consiste en utilizar dos pilas AA convencionales, con una t
 
 Observamos que el terminal positivo del conjunto de pilas se conecta al pin *VSYS*, mientras que el terminal negativo se conecta a un pin *GND* (el pin físico 38 en este caso).
 
-Es importante tener en cuenta que las pilas AA pueden no proporcionar una corriente constante y estable, lo que puede afectar la duración y el rendimiento de la alimentación de la placa RPico W. Para obtener un rendimiento óptimo, se recomienda utilizar una fuente de alimentación confiable y estable.
+Es importante tener en cuenta que las pilas AA pueden no proporcionar una corriente constante y estable, lo que puede afectar la duración y el rendimiento de la alimentación de la placa **RPico W**. Para obtener un rendimiento óptimo, se recomienda utilizar una fuente de alimentación confiable y estable.
 
 Una opción recomendada son las baterías de litio, como las baterías de litio-ion (Li-ion) o litio-polímero (Li-Po), que tienen una tensión nominal de 3,7[Voltios]. Estas baterías proporcionan una fuente de alimentación más confiable y ofrecen una mayor duración en comparación con las pilas AA.
 
