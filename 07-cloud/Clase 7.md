@@ -270,7 +270,7 @@ Y también agregaremos la funcion *serve()* al bloque *try/except*. Esto permiti
 ```python
 try:
     ip = connect()
-    open_socket(ip)
+    connection = open_socket(ip)
     serve(connection)
 except KeyboardInterrupt :
     machine.reset()
@@ -583,11 +583,11 @@ A pesar de sus metas compartidas, cada una cumple un rol único en el ecosistema
 
 La **nube IoT** ofrece una amplia gama de servicios, como almacenamiento, procesamiento y análisis de datos, destinados a los **dispositivos IoT**. Se trata de un entorno virtual altamente eficiente donde los datos generados por los **dispositivos IoT** pueden almacenarse y procesarse de manera óptima. Además, proporciona escalabilidad, seguridad y flexibilidad para gestionar grandes volúmenes de datos, permitiendo además el acceso remoto a través de Internet.
 
-Por otro lado, una **plataforma IoT**** es un conjunto integrado de software, herramientas y servicios que facilita el desarrollo, la implementación y la gestión de soluciones **IoT**. Esta plataforma sirve como base fundamental para conectar, administrar y controlar los **dispositivos IoT**, así como para recopilar, procesar y analizar los datos generados por ellos. Además, una **plataforma IoT** puede ofrecer características adicionales como visualización de datos, automatización e integración con otros sistemas.
+Por otro lado, una **plataforma IoT** es un conjunto integrado de software, herramientas y servicios que facilita el desarrollo, la implementación y la gestión de soluciones **IoT**. Esta plataforma sirve como base fundamental para conectar, administrar y controlar los **dispositivos IoT**, así como para recopilar, procesar y analizar los datos generados por ellos. Además, una **plataforma IoT** puede ofrecer características adicionales como visualización de datos, automatización e integración con otros sistemas.
 
-Si bien la **nube IoT** desempeña un papel importante dentro de una **plataforma IoT**, al proporcionar la infraestructura necesaria para almacenar y procesar los datos generados por los **dispositivos IoT**, es esencial tener en cuenta que una **plataforma IoT** engloba otras funcionalidades y servicios necesarios para el desarrollo completo de soluciones **IoT**. La **nube IoT** se integra en la **plataforma IoT** como uno de sus componentes clave para almacenar y analizar datos, pero no es la única funcionalidad que ofrece una plataforma completa de IoT.
+Si bien la **nube IoT** desempeña un papel importante dentro de una **plataforma IoT**, al proporcionar la infraestructura necesaria para almacenar y procesar los datos generados por los **dispositivos IoT**, es esencial tener en cuenta que una **plataforma IoT** engloba otras funcionalidades y servicios necesarios para el desarrollo completo de soluciones **IoT**. La **nube IoT** se integra en la **plataforma IoT** como uno de sus componentes clave para almacenar y analizar datos, pero no es la única funcionalidad que ofrece una plataforma completa de **IoT**.
 
-Existe un amplio abanico de plataformas IoT en la actualidad, cada una con sus especificaciones y características distintivas. En nuestro curso, utilizaremos [Cloud Studio](https://www.cloud.studio/plataforma-iot-lista-para-usar/).
+Existe un amplio abanico de **plataformas IoT** en la actualidad, cada una con sus especificaciones y características distintivas. En nuestro curso, utilizaremos [Cloud Studio](https://www.cloud.studio/plataforma-iot-lista-para-usar/).
 
 ![Figura 13 - Cloud Studio](./images/Figura13-CloudStudio.jpg)  
 *Figura 13 - Cloud Studio*

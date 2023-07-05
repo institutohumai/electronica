@@ -5,8 +5,8 @@ import socket
 from machine import Pin, ADC
 from utime import sleep
 
-ssid = 'Nuevaconexion'
-password = 'caro2905'
+ssid = 'sala1eis'
+password = 'sala1eis'
 
 LED_onboard = Pin("LED", Pin.OUT)
 
