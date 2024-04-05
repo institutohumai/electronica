@@ -1,0 +1,87 @@
+{
+    "01-introduccion": {
+        "name": "01-introduccion",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/17E2ofo0wMbz-nBY9QZYGDbX2O8O7PCiO",
+            "Clase 1.ipynb": "https://colab.research.google.com/drive/14mNgW8J4dGmNjHO3J_v9jv8tpv-c8k1w"
+        },
+        "materials": {}
+    },
+    "02-gpio": {
+        "name": "02-gpio",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/1jVp_ioBPlQ0YczxVen4RS3C3ILqNg8UW",
+            "Clase 2.ipynb": "https://colab.research.google.com/drive/1eEwHF8g4A50nJFoH1EXDNdmiyJ_KZeWS"
+        },
+        "materials": {}
+    },
+    "03-adc_pwm": {
+        "name": "03-adc_pwm",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/1GDAIAa0a9vcvgBbGJmpRcVAph1s3pwgc",
+            "Clase 3.ipynb": "https://colab.research.google.com/drive/12Asb0oqEwI3ooEHPNv7MlBLEc7bxXVKh"
+        },
+        "materials": {}
+    },
+    "04-i2c": {
+        "name": "04-i2c",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/15XbsCjXKJsyNTeLxMjNE0Hp7loYvAAj5",
+            "Clase 4.ipynb": "https://colab.research.google.com/drive/1IEDIMdUUQK8tkaKUGVylTbDGYd47W9Cw"
+        },
+        "materials": {}
+    },
+    "05-data": {
+        "name": "05-data",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Clase 5.ipynb": "https://colab.research.google.com/drive/1u-Am85FnkDsDGSgl3dL4SvHL0jztB2AH"
+        },
+        "materials": {}
+    },
+    "06-iot": {
+        "name": "06-iot",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Clase 6.ipynb": "https://colab.research.google.com/drive/15wq9RDj561vplO-2lERhX6R2mZghIIRz"
+        },
+        "materials": {}
+    },
+    "07-cloud": {
+        "name": "07-cloud",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Clase 7.ipynb": "https://colab.research.google.com/drive/18p2-_HwvEl2B-XMbhW2kOgqX02Ch0BkV"
+        },
+        "materials": {}
+    },
+    "08-TFI_22'": {
+        "name": "08-TFI_22'",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "TFI_22.ipynb": "https://colab.research.google.com/drive/1dOOH14d7L0sSEKBHQI0wWJqk_RHCmgyL"
+        },
+        "materials": {}
+    },
+    "08-TFI_23'": {
+        "name": "08-TFI_23'",
+        "video_urls": [],
+        "long_description": {},
+        "ipynbs": {
+            "Clase 8.ipynb": "https://colab.research.google.com/drive/1WY5t-rcNrM3dPhvnoeEKWLKOFGozdXCR"
+        },
+        "materials": {}
+    }
+}
