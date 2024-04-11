@@ -1,7 +1,10 @@
 {
-    "01-introduccion": {
-        "name": "01-introduccion",
-        "video_urls": [],
+    "1_Introduccion": {
+        "name": "Introducción",
+        "video_urls": [
+            "https://youtu.be/0KDJrCEoKBo",
+
+        ],
         "long_description": {},
         "ipynbs": {
             "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/17E2ofo0wMbz-nBY9QZYGDbX2O8O7PCiO",
@@ -9,9 +12,11 @@
         },
         "materials": {}
     },
-    "02-gpio": {
-        "name": "02-gpio",
-        "video_urls": [],
+    "2_Primeros_pasos_con_RPicoW": {
+        "name": "Primeros pasos con nuestra RPico W. Entradas y salidas digitales",
+        "video_urls": [
+            "https://youtu.be/VbUz9gZFvM4"
+        ],
         "long_description": {},
         "ipynbs": {
             "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/1jVp_ioBPlQ0YczxVen4RS3C3ILqNg8UW",
@@ -19,9 +24,11 @@
         },
         "materials": {}
     },
-    "03-adc_pwm": {
-        "name": "03-adc_pwm",
-        "video_urls": [],
+    "3_Entradas_y_salidas_analogicas_ADC_PWM": {
+        "name": "Entradas y Salidas analógicas. Convertidor Analógico a Digital (ADC) y Modulación por Ancho de Pulso (PWM)",
+        "video_urls": [
+            "https://youtu.be/fUrCsw-mrYc"
+        ],
         "long_description": {},
         "ipynbs": {
             "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/1GDAIAa0a9vcvgBbGJmpRcVAph1s3pwgc",
@@ -29,9 +36,11 @@
         },
         "materials": {}
     },
-    "04-i2c": {
-        "name": "04-i2c",
-        "video_urls": [],
+    "4_Protocolos_de_comunicacion_serie": {
+        "name": "Protocolos de comunicación serie",
+        "video_urls": [
+            "https://youtu.be/ME4xvSW4z00"
+        ],
         "long_description": {},
         "ipynbs": {
             "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/15XbsCjXKJsyNTeLxMjNE0Hp7loYvAAj5",
@@ -39,30 +48,14 @@
         },
         "materials": {}
     },
-    "05-data": {
-        "name": "05-data",
-        "video_urls": [],
+    "5_Almacenamiento_de_datos": {
+        "name": "Almacenamiento de datos",
+        "video_urls": [
+            "https://youtu.be/O_q1ZMjlRA0"
+        ],
         "long_description": {},
         "ipynbs": {
             "Clase 5.ipynb": "https://colab.research.google.com/drive/1u-Am85FnkDsDGSgl3dL4SvHL0jztB2AH"
-        },
-        "materials": {}
-    },
-    "06-iot": {
-        "name": "06-iot",
-        "video_urls": [],
-        "long_description": {},
-        "ipynbs": {
-            "Clase 6.ipynb": "https://colab.research.google.com/drive/15wq9RDj561vplO-2lERhX6R2mZghIIRz"
-        },
-        "materials": {}
-    },
-    "07-cloud": {
-        "name": "07-cloud",
-        "video_urls": [],
-        "long_description": {},
-        "ipynbs": {
-            "Clase 7.ipynb": "https://colab.research.google.com/drive/18p2-_HwvEl2B-XMbhW2kOgqX02Ch0BkV"
         },
         "materials": {}
     },
