@@ -2,8 +2,7 @@
     "1_Introduccion": {
         "name": "Introducción",
         "video_urls": [
-            "https://youtu.be/0KDJrCEoKBo",
-
+            "https://youtu.be/0KDJrCEoKBo"
         ],
         "long_description": {},
         "ipynbs": {
