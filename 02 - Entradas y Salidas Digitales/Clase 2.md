@@ -7,13 +7,13 @@ En esta clase trabajaremos en el desarrollo de sistemas físicos que, empleando 
 
 Comenzaremos por conectar componentes electrónicos básicos a nuestra **RPico W**, para luego comprender y poder realizar la conexión de sensores y actuadores.
 
-Empecemos!
+¡Empecemos!
 
 ## 2.1 Tu primer programa en MicroPython - ¡Hola LED!
 
 Así como imprimir *Hello World!* en la pantalla es un conocido primer paso para aprender un lenguaje de programación, hacer que un *LED* se encienda es la introducción tradicional al mundo de la electrónica.
 
-Para comenzar, utilizaremos el pequeño *LED* que tiene nuestra **RPico W** y que hicimos referencia en la clase anterior. Recordemos que se encuentra en la esquina superior izquierda de nuestra placa, al lado del puerto micro-USB, acompañado de la etiqueta *LED* como se ilustra en la **Figura 02**. Este pequeño *LED* funciona como cualquier otro: cuando esté encendido, brillará; y cuando esté apagado, permanecerá oscuro.
+Para comenzar, utilizaremos el pequeño *LED* que tiene nuestra **RPico W** y al que hicimos referencia en la clase anterior. Recordemos que se encuentra en la esquina superior izquierda de nuestra placa, al lado del puerto micro-USB, acompañado de la etiqueta *LED* como se ilustra en la **Figura 02**. Este pequeño *LED* funciona como cualquier otro: cuando esté encendido, brillará; y cuando esté apagado, permanecerá oscuro.
 
 ![Figura 02 - LEDOnboard](./images/Figura02-LEDOnboard.jpg)  
 *Figura 02 - LED Onboard*
@@ -56,7 +56,7 @@ Ahora sí ya podemos ejecutar nuestro código completo, para ello, debemos hacer
 ![Figura 03 - Guardar Código](./images/Figura03-GuardarCodigo.jpg)  
 *Figura 03 - Guardar Código*
 
-Y ahora sí, verás que el LED de nuestra **RPico W** se ha encendido. Felicitaciones!
+Y ahora sí, verás que el LED de nuestra **RPico W** se ha encendido. ¡Felicitaciones!
 
 Sin embargo, notarás que el *LED* permanece encendido durante toda la ejecución del programa. Esto se debe a que le indicamos a la **RPico W** que lo encienda, pero nunca le indicamos que lo apague. Para ello, agregamos la siguiente línea en la parte inferior del código:  
 
@@ -125,7 +125,7 @@ while True:
 
 En la clase anterior hablamos acerca del *GPIO* de nuestra **RPico W**. Sabemos que se compone de dos filas de conexiones o pines metálicos que se pueden usar como entradas o salidas, y nos permitirán conectar a nuestra placa distintos dispositivos como LEDs, pulsadores, sensores, etc.
 
-Estos pines están incluidos en todos los modelos de *Raspberry Pi* aunque con diferencias, por lo que siempre es importante tener a mano el pinout completo del modelo que estemos utilizando.
+Estos pines están incluidos en todos los modelos de *Raspberry Pi* aunque con diferencias, por lo que siempre es importante tener a mano el *pinout* completo del modelo que estemos utilizando.
 
 La utilización del *GPIO* y el desarrollo de proyectos que llevemos a cabo durante el curso, será mucho más fácil si utilizamos una *placa de pruebas* o *protoboard*, la cual nos permite sujetar los componentes que queramos comandar y realizar las conexiones eléctricas.
 
@@ -353,60 +353,65 @@ Guardamos y ejecutamos el programa. Al principio, notarás que no pasa nada. Sin
 
 ## 2.3 Sensores y actuadores 
 
-El desarrollo de cualquier proyecto que demande el empleo de hardware y software de forma conjunta, involucra la utilización de sensores y actuadores como parte fundamental para llevarlo a cabo, siendo la automatización industrial e **Internet de las Cosas** sus campos de aplicación más conocidos.
+El desarrollo de cualquier proyecto que requiera la integración de hardware y software implica el uso de sensores y actuadores como componentes fundamentales, siendo la *automatización industrial* y el **Internet de las Cosas** sus campos de aplicación más destacados.
 
-Un sensor es un dispositivo capaz de detectar magnitudes físicas como temperatura, intensidad lumínica, distancia, etc.; y convertirla en una magnitud eléctrica como tensión o corriente. Es decir, recoge información del mundo real y la transforma en datos que pueden ser interpretados por nuestra **RPico W**.
+Un sensor es un dispositivo capaz de detectar *magnitudes físicas* como temperatura, intensidad lumínica, distancia, etc., y convertirlas en *magnitudes eléctricas* como tensión o corriente. En otras palabras, recolecta información del mundo real y la convierte en datos interpretables por nuestra **RPico W**.
 
-Por otro lado, un actuador es un dispositivo que, al contrario de un sensor, tiene la capacidad de transformar una magnitud eléctrica en una magnitud física. Es decir, interpreta los datos enviados desde nuestra **RPico W** y "actúa" sobre el mundo real realizando una acción determinada. 
+Por otro lado, un actuador es un dispositivo que, a diferencia de un sensor, transforma una *magnitud eléctrica* en una *magnitud física*. En otras palabras, interpreta los datos enviados desde nuestra **RPico W** y realiza una acción específica en el mundo real.
 
-Nuestra **RPico W** recibe información del entorno sobre el que queremos realizar algún tipo de acción por medio de los *sensores*, esa información aporta datos para que nuestro programa decida si hay que realizar alguna acción; y si es así, esta acción se lleva a cabo por un *actuador* que tiene la capacidad de provocarla. 
+Nuestra **RPico W** recibe información del entorno a través de los sensores, esta información proporciona datos para que nuestro programa decida si es necesario llevar a cabo alguna acción; y si es así, dicha acción se ejecuta mediante un actuador con la capacidad de realizarla.
 
-Existe un gran número de sensores y actuadores disponibles en el mercado, pero no todos son adecuados para nuestra **RPico W**. A la hora de elegir un sensor y/o actuador, debemos leer detenidamente las características y elegir uno que sea compatible con nuestro sistema (fundamentalmente voltajes y corrientes de trabajo) y que sea sencillo de usar, o nos facilite una librería sencilla y completa.
+De hecho, la arquitectura que hemos descrito, con la **RPico W** como unidad central, puede replicarse con cualquier equipo de *Raspberry Pi* en particular y con cualquier **sistema embebido** en general.
 
-Algunos ejemplos de sensores compatibles con nuestra **RPico W** son el *HC-SR501* (sensor de movimiento), el *BMP 280* (sensor de presión y temperatura) y el *HC-SR04* (sensor de distancia). En la última sección de esta clase veremos cómo se emplea el *HC-SR501*, ya hablamos acerca del *BMP 280* en la primera clase, y en la **Figura 14** se muestra el *HC-SR04*.
+![Figura 14 - Arquitectura Básica con RPi](./images/Figura14-ArquitecturaBásicaConRPi.jpg)  
+*Figura 14 - Arquitectura Básica con RPi*
 
-Por su parte, algunos ejemplos de actuadores para nuestra **RPico W** son los *LEDs* que estuvimos empleando, pero también podemos nombrar, entre otros, a los *buzzer* y a los servomotores como el *SG90*. Utilizaremos un *buzzer* en la sección siguiente, y se muestra el *SG90* en la **Figura 14**.
+Existe un gran número de sensores y actuadores disponibles en el mercado, pero no todos son adecuados para nuestra **RPico W**. A la hora de elegir un sensor y/o actuador, debemos leer detenidamente las características y elegir uno que sea compatible con nuestro sistema (fundamentalmente voltajes y corrientes de trabajo) y que sea sencillo de usar, o nos facilite una librería sencilla y correctamente documentada.
 
-![Figura 14 - HC-SR04 y SG90](./images/Figura14-HC-SR04ySG90.jpg)  
-*Figura 14 - HC-SR04 y SG90*
+Algunos ejemplos de sensores compatibles con nuestra **RPico W** incluyen el sensor de movimiento *HC-SR501*, el sensor de temperatura y humedad *DHT11*, y el sensor de distancia *HC-SR04*. En la última sección de esta clase, veremos cómo se emplea el *HC-SR501*. Ya hemos hablado del *DHT11* en la primera clase, y en la **Figura 15** se muestra el *HC-SR04*.
+
+En cuanto a los actuadores para nuestra **RPico W**, además de los *LEDs* que hemos estado empleando, también podemos mencionar los *buzzers* y los *servomotores* como el *SG90*. Utilizaremos un *buzzer* en la siguiente sección, y el *SG90* se muestra en la **Figura 15**.
+
+![Figura 15 - HC-SR04 y SG90](./images/Figura15-HC-SR04ySG90.jpg)  
+*Figura 15 - HC-SR04 y SG90*
 
 ### 2.3.1 Utilización de un actuador: buzzer activo
 
-Un *buzzer* o *zumbador piezoeléctrico* es un actuador que es capaz de vibrar y emitir sonido cuando es sometido a una tensión. Se utilizan en aquellos sistemas en los que necesitamos una señal de señalización o aviso, por lo que es un dispositivo muy empleado. Existen dos tipos de *buzzer*; activos y pasivos. 
+Un *buzzer* o *zumbador piezoeléctrico* es un actuador que es capaz de vibrar y emitir sonido cuando es sometido a una tensión eléctrica. Se utilizan en aquellos sistemas en los que necesitamos una señal de señalización o aviso, por lo que es un dispositivo muy empleado. Existen dos tipos de *buzzer*; activos y pasivos. 
 
 Un *buzzer activo* es capaz de generar sonido a una determinada frecuencia (un sonido en concreto) al someterse a una tensión. Esto se debe a que cuentan con un oscilador interno que emite señales periódicas al alimentar el *buzzer*, como esa señal no varía, el sonido que emiten es siempre el mismo. En contraposición, los pasivos no disponen de un oscilador interno con lo que si variamos la frecuencia de la tensión de alimentación conseguiremos variar el sonido que emite el *buzzer*. 
 
-Al contar el *buzzer activo* con un oscilador en su interior, se vuelve más fácil de utilizar, ya que empieza a emitir sonido tan pronto como se conecte a la alimentación. Por el contrario, en el *buzzer pasivo*, el oscilador interno desaparece y su funcionamiento depende de la una señal externa, la cual debe ser una señal cuadrada (**Figura 15**).
+Al contar el *buzzer activo* con un oscilador en su interior, se vuelve más fácil de utilizar, ya que empieza a emitir sonido tan pronto como se conecte a la alimentación. Por el contrario, en el *buzzer pasivo*, el oscilador interno desaparece y su funcionamiento depende de la una señal externa, la cual debe ser una señal cuadrada (**Figura 16**).
 
 A fines prácticos, utilizaremos un *buzzer activo* cuando simplemente queramos hacer un sonido constante como puede ser el de una alarma, y un *buzzer pasivo* cuando queramos que suene una melodía.
 
-![Figura 15 - Buzzer activo y pasivo](./images/Figura15-BuzzerActivoYPasivo.jpg)  
-*Figura 15 - Buzzer activo y pasivo*
+![Figura 16 - Buzzer activo y pasivo](./images/Figura16-BuzzerActivoYPasivo.jpg)  
+*Figura 16 - Buzzer activo y pasivo*
 
 Comercialmente, los *buzzer* se comercializan en un amplio abanico de tamaños y potencias, desde tonos casi imperceptibles hasta alarmas realmente estridentes. El consumo eléctrico, lógicamente, también varía con la potencia del *buzzer*, un dato que debemos tener en cuenta a la hora de comprar uno.
 
 Además, debemos diferenciar entre *buzzer* y *módulo buzzer*. El *buzzer*, a secas, es el componente individual que tiene como función generar sonidos. Mientras que el *módulo buzzer* es una placa en la que encontramos el *buzzer* junto con los componentes externos adicionales necesarios para conectarlo a un microcontrolador.
 
-Los buzzer tienen polaridad, es decir, tienen un terminal positivo y otro negativo. En la **Figura 16** se muestran dos modelos; el de la izquierda posee dos cables, donde el rojo es el positivo y el negro es el negativo. Por su parte, el modelo de la derecha, posee dos patas, donde el terminal positivo es más largo que el negativo. Además, suelen llevar una inscripción que indica cual es el terminal positivo.
+Los buzzer tienen polaridad, es decir, tienen un terminal positivo y otro negativo. En la **Figura 17** se muestran dos modelos; el de la izquierda posee dos cables, donde el rojo es el positivo y el negro es el negativo. Por su parte, el modelo de la derecha, posee dos patas, donde el terminal positivo es más largo que el negativo. Además, suelen llevar una inscripción que indica cual es el terminal positivo.
 
-![Figura 16 - Modelos de Buzzer](./images/Figura16-ModelosDeBuzzer.jpg)  
-*Figura 16 - Modelos de Buzzer*
+![Figura 17 - Modelos de Buzzer](./images/Figura17-ModelosDeBuzzer.jpg)  
+*Figura 17 - Modelos de Buzzer*
 
-Por su parte, los *módulos buzzer* suelen contar con un tercer pin que, dependiendo del modelo que tengamos, lo conectaremos o no, a nuestra **RPico W**. En la **Figura 17** se muestran el *KY-012* y el *MH-FMD* que son *módulos buzzer* muy comercializados actualmente.
+Por su parte, los *módulos buzzer* suelen contar con un tercer pin que, dependiendo del modelo que tengamos, lo conectaremos o no, a nuestra **RPico W**. En la **Figura 18** se muestran el *KY-012* y el *MH-FMD* que son *módulos buzzer* muy comercializados actualmente.
 
-![Figura 17 - Módulo Buzzer KY-012 y MH-FMD](./images/Figura17-ModuloBuzzerKY-012yMH-FMD.jpg)  
-*Figura 17 - Módulo Buzzer KY-012 y MH-FMD*
+![Figura 18 - Módulo Buzzer KY-012 y MH-FMD](./images/Figura18-ModuloBuzzerKY-012yMH-FMD.jpg)  
+*Figura 18 - Módulo Buzzer KY-012 y MH-FMD*
 
 Ahora sí, vamos a realizar un ejemplo. Necesitaremos, además de la placa de pruebas con la **RPico W** conectada, un *buzzer* o *módulo buzzer* y cables Dupont M2F.
 
 En términos de conexión y programación, un *buzzer activo* es igual a un *LED* (ya que ambos son dispositivos de salida que se activan y desactivan con una **señal digital binaria**). Repite el circuito que hiciste para el Ejemplo N°3, pero sustituye el *LED* por el *buzzer* y no uses la resistencia, ya que el *buzzer* necesitará más corriente para funcionar. 
 
-Si empleamos un *buzzer* como el que se encuentra a la izquierda en la **Figura 16**, el cable rojo queda conectado al *GP15* y el cable negro a *GND*. Por su parte, si utilizamos un *buzzer* como el que se encuentra a la derecha en la **Figura 16**, el terminal positivo queda conectado al *GP15* y el terminal negativo a *GND*.
+Si empleamos un *buzzer* como el que se encuentra a la izquierda en la **Figura 17**, el cable rojo queda conectado al *GP15* y el cable negro a *GND*. Por su parte, si utilizamos un *buzzer* como el que se encuentra a la derecha en la **Figura 17**, el terminal positivo queda conectado al *GP15* y el terminal negativo a *GND*.
 
-Si usamos un *módulo buzzer KY-012*, asegúrate de que la pata marcada con el símbolo menos (-) esté conectada al pin *GND*, y la marcada con "S" o "SIGNAL" esté conectada a *GP15*. Uno de los pines quedará sin conectar. Por su parte, si disponemos de un *módulo buzzer MH-FMD* si conectaremos los tres pines con los que cuenta, y lo haremos como se muestra en la **Figura 18**.
+Si usamos un *módulo buzzer KY-012*, asegúrate de que la pata marcada con el símbolo menos (-) esté conectada al pin *GND*, y la marcada con "S" o "SIGNAL" esté conectada a *GP15*. Uno de los pines quedará sin conectar. Por su parte, si disponemos de un *módulo buzzer MH-FMD* si conectaremos los tres pines con los que cuenta, y lo haremos como se muestra en la **Figura 19**.
 
-![Figura 18 - Conexión módulo buzzer MH-FMD a la RPico](./images/Figura18-ConexiónMóduloBuzzerMH-FMDalaRPico.jpg)  
-*Figura 18 - Conexión módulo buzzer MH-FMD a la RPico*
+![Figura 19 - Conexión módulo buzzer MH-FMD a la RPico W](./images/Figura19-ConexiónMóduloBuzzerMH-FMDalaRPicoW.jpg)  
+*Figura 19 - Conexión módulo buzzer MH-FMD a la RPico W*
 
 El código completo debería quedar de la siguiente manera (Ver *Ejemplo6_BuzzerActivo.py* en el repositorio), donde solo hemos cambiado el nombre del objeto con respecto al Ejemplo N°3:
 
@@ -424,31 +429,34 @@ Ejecuta el programa y obtendrás una señal de alarma con una intermitencia de 5
 
 Con lo aprendido hasta el momento; ¿te animás a accionar el buzzer con el pulsador?
 
-### 2.3.2 Utilización de un sensor: PIR HC-SR501
+### 2.3.2 Utilización de un sensor: PIR HC-SR501. Proyecto de una alarma de movimiento.  
+
+![Figura 20 - Proyecto de una alarma de movimiento](./images/Figura20-ProyectoDeUnaAlarmaDeMovimiento.jpg)  
+*Figura 20 - Proyecto de una alarma de movimiento*
 
 Como tema final de esta clase, vamos a realizar un proyecto que utilice un sensor como dispositivo de entrada y que cuente con algunos de los componentes que vimos hasta el momento. El proyecto escogido es una alarma de movimiento y para ello utilizaremos un sensor infrarrojo pasivo (o *PIR*, por sus siglas en inglés, *Passive InfraRed*), que nos permite detectar la presencia o movimiento de un objeto y envía una señal determinada a nuestro microcontrolador. Hay cientos de sensores *PIR* disponibles, pero utilizaremos el *HC-SR501* que es económico, de buen rendimiento y funciona perfectamente con la **RPico W**.
 
 Todos los seres vivos e incluso los objetos, emiten radiación electromagnética infrarroja, debido a la temperatura a la que se encuentran. A mayor temperatura, la radiación aumenta. Los sensores PIR detectan el calor corporal (energía infrarroja) en un rango de espacio determinado, buscando cambios de temperatura, y envían una señal eléctrica de aviso cuando esto ocurra. Su funcionamiento es similar al de una cámara, pero en lugar de capturar la luz visible, buscan el calor emitido por un cuerpo vivo como radiación infrarroja. Se le conoce como sensor infrarrojo pasivo, en lugar de activo, porque al igual que un sensor de cámara, no envía ninguna señal infrarroja propia.
 
-Si tomas un sensor *HC-SR501* (**Figura 19**) muy probablemente te esté llamando la atención su forma. Ese encapsulado semiesférico que tiene se denomina *lente de Fresnel*, está hecho de polietileno y su objetivo es permitir el paso de la radiación infrarroja en el rango de los 8 y 14 micrones. La lente detecta radiación en un ángulo determinado y, adicionalmente, concentra la energía en la superficie de detección del sensor PIR, permitiendo una mayor sensibilidad del dispositivo. 
+Si tomas un sensor *HC-SR501* (**Figura 21**) muy probablemente te esté llamando la atención su forma. Ese encapsulado semiesférico que tiene se denomina *lente de Fresnel*, está hecho de polietileno y su objetivo es permitir el paso de la radiación infrarroja en el rango de los 8 y 14 micrones. La lente detecta radiación en un ángulo determinado y, adicionalmente, concentra la energía en la superficie de detección del sensor PIR, permitiendo una mayor sensibilidad del dispositivo. 
 
-![Figura 19 - Sensor PIR y Lente de Fresnel](./images/Figura19-SensorPIRyLenteDeFresnel.jpg)  
-*Figura 19 - Sensor PIR y Lente de Fresnel*
+![Figura 21 - Sensor PIR y Lente de Fresnel](./images/Figura21-SensorPIRyLenteDeFresnel.jpg)  
+*Figura 21 - Sensor PIR y Lente de Fresnel*
 
-Por otro lado, si miramos la placa electrónica que tiene, podemos diferenciar las partes que se muestran en la **Figura 20**. El sensor utiliza dos potenciómetros (que se ajustan con la ayuda de un destornillador) y un jumper, que permiten modificar sus parámetros y adaptarlo a las necesidades de la aplicación.
+Por otro lado, si miramos la placa electrónica que tiene, podemos diferenciar las partes que se muestran en la **Figura 22**. El sensor utiliza dos potenciómetros (que se ajustan con la ayuda de un destornillador) y un jumper, que permiten modificar sus parámetros y adaptarlo a las necesidades de la aplicación.
 
-![Figura 20 - Placa Electrónica HC-SR501](./images/Figura20-PlacaElectrónicaHC-SR501.jpg)  
-*Figura 20 - Placa Electrónica HC-SR501*
+![Figura 22 - Placa Electrónica HC-SR501](./images/Figura22-PlacaElectrónicaHC-SR501.jpg)  
+*Figura 22 - Placa Electrónica HC-SR501*
 
-Mediante los potenciómetros podemos ajustar tanto el tiempo de disparo de la señal de alarma de movimiento, como la distancia de detección. Los potenciómetros correspondientes deben girarse en la dirección mostrada en la **Figura 21** para realizar los ajustes.
+Mediante los potenciómetros podemos ajustar tanto el tiempo de disparo de la señal de alarma de movimiento, como la distancia de detección. Los potenciómetros correspondientes deben girarse en la dirección mostrada en la **Figura 23** para realizar los ajustes.
 
-![Figura 21 - Ajustes del HC-SR501](./images/Figura21-AjustesDelHC-SR501.jpg)  
-*Figura 21 - Ajustes del HC-SR501*
+![Figura 23 - Ajustes del HC-SR501](./images/Figura23-AjustesDelHC-SR501.jpg)  
+*Figura 23 - Ajustes del HC-SR501*
 
-El rango de detección de movimiento de los PIR es generalmente con alcances de hasta 7 metros, y con aperturas de 90° a 110°, como se muestra en la **Figura 22**.
+El rango de detección de movimiento de los PIR es generalmente con alcances de hasta 7 metros, y con aperturas de 90° a 110°, como se muestra en la **Figura 24**.
 
-![Figura 22 - Rango de detección del HC-SR501](./images/Figura22-RangoDeDetecciónDelHC-SR501.jpg)  
-*Figura 22 - Rango de detección del HC-SR501*
+![Figura 24 - Rango de detección del HC-SR501](./images/Figura24-RangoDeDetecciónDelHC-SR501.jpg)  
+*Figura 24 - Rango de detección del HC-SR501*
 
 De acuerdo a la posición del jumper, tenemos dos modos de operación:
 
@@ -462,18 +470,18 @@ Concluidos los detalles acerca de nuestro sensor, vamos a realizar un proyecto. 
 
 Luego toma tu *HC-SR501*, y localiza los tres pines macho que tiene, que son los que utilizaremos para la vinculación con la **RPico W**. Sin embargo, no podemos empujarlos directamente sobre la protoboard debido a su tamaño. En lugar de ello, tomaremos tres cables Dupont Macho-Hembra (M2F) e insertaremos los extremos hembra en los pines de tu *HC-SR501*. 
 
-A continuación, tomaremos los extremos macho y los conectaremos a la **RPico W** a través de la placa de pruebas. Tomando como referencia la denominación de la **Figura 20** y considerado que el sensor se utilizará de forma vertical, los pines quedan dispuestos de modo que el pin de tierra está en la parte inferior (cable negro), el pin de señal o disparador está en el medio (cable azul) y el pin de alimentación está en la parte superior (cable rojo).
+A continuación, tomaremos los extremos macho y los conectaremos a la **RPico W** a través de la placa de pruebas. Tomando como referencia la denominación de la **Figura 22** y considerado que el sensor se utilizará de forma vertical, los pines quedan dispuestos de modo que el pin de tierra está en la parte inferior (cable negro), el pin de señal o disparador está en el medio (cable azul) y el pin de alimentación está en la parte superior (cable rojo).
 
 Comencemos con el cable de tierra, que debe conectarse a cualquiera de los pines *GND* de la **RPico W**, como por ejemplo el pin N°38. También podemos utilizar la línea *-* de la protoboard, ya que se encuentra eléctricamente conectado al pin *GND* correspondiente al pin N°23. A continuación, conectemos el cable de señal a algún pin *GPIO* que no esté en uso por otro componente (tomaremos como ejemplo el pin *GP28*). 
 
 Finalmente, debemos conectar el cable de alimentación. Sin embargo, no lo conectes al pin *3V3* de la **RPico W**: el *HC-SR501* es un sensor de 5[V], lo que significa que necesita 5[volts] de electricidad para funcionar. Si conectamos el sensor al pin *3V3* de la **RPico W** no funcionará ya que el pin no le proporciona la suficiente energía. 
 
-¿Y entonces cómo hacemos? Para darle al sensor los 5[volts] que necesita, vamos a conectar este cable al pin superior derecho de la **RPico W**, identificado como *VBUS*. Este pin está conectado al puerto micro-USB de la **RPico W** y aprovecha la línea de alimentación USB de 5[volts] antes de que se convierta a 3,3[volts] para alimentar el *RP2040* de la **RPico W**. El circuito completo debería quedar como el que se muestra en la **Figura 23**.
+¿Y entonces cómo hacemos? Para darle al sensor los 5[volts] que necesita, vamos a conectar este cable al pin superior derecho de la **RPico W**, identificado como *VBUS*. Este pin está conectado al puerto micro-USB de la **RPico W** y aprovecha la línea de alimentación USB de 5[volts] antes de que se convierta a 3,3[volts] para alimentar el *RP2040* de la **RPico W**. El circuito completo debería quedar como el que se muestra en la **Figura 25**.
 
-![Figura 23 - Circuito Ejemplo N°7](./images/Figura23-CircuitoEjemploN°7.jpg)  
-*Figura 23 - Circuito Ejemplo N°7*
+![Figura 25 - Circuito Ejemplo N°7](./images/Figura25-CircuitoEjemploN°7.jpg)  
+*Figura 25 - Circuito Ejemplo N°7*
 
-Para este primer proyecto, y con la ayuda de un destornillador, colocaremos el potenciómetro correspondiente a "Incrementar tiempo" completamente a la izquierda (como se encuentra en la **Figura 20**); y el potenciómetro "Incrementar distancia" completamente a la derecha. Por otro lado, dejaremos el jumper en posición de "un solo disparo". Luego, cuando nos familiaricemos con la utilización del sensor, podremos ir regulando y ajustando todo de acuerdo a nuestros requerimientos.
+Para este primer proyecto, y con la ayuda de un destornillador, colocaremos el potenciómetro correspondiente a "Incrementar tiempo" completamente a la izquierda (como se encuentra en la **Figura 23**); y el potenciómetro "Incrementar distancia" completamente a la derecha. Por otro lado, dejaremos el jumper en posición de "un solo disparo". Luego, cuando nos familiaricemos con la utilización del sensor, podremos ir regulando y ajustando todo de acuerdo a nuestros requerimientos.
 
 Y ahora a programar. Comenzamos como siempre, cargando las librerías:
 
