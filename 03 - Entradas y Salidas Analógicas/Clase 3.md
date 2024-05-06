@@ -354,9 +354,9 @@ Incorporemos un ejemplo numérico como el que muestra en la **Figura 20**. Si el
 
 En ambos ejemplos, no hemos modificado el *ciclo* (y por ende tampoco la frecuencia) de la señal **PWM**, solo hemos trabajado sobre su **ciclo de trabajo**:
 
-$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,5[ms]+0,5[ms]} = \frac{1}{1[ms]} = 1000[Hz]   -\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,5[ms]}{1[ms]} .100 \%= \text{50}%$%  
+$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,5[ms]+0,5[ms]} = \frac{1}{1[ms]} = 1000[Hz]   -\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,5[ms]}{1[ms]} .100 \%= \text{50\%}$  
 
-$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,1ms]+0,9[ms]} = \frac{1}{1[ms]} = 1000[Hz] -\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,1[ms]}{1[ms]} .100 \% = \text{10}%$%    
+$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,1ms]+0,9[ms]} = \frac{1}{1[ms]} = 1000[Hz] -\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,1[ms]}{1[ms]} .100 \% = \text{10\%}$   
 
 Esta modulación es empleada para controlar la cantidad de energía que se envía a un dispositivo. Es una técnica muy utilizada para regular la velocidad de giro de los motores y como regulación de intensidad lumínica como en el ejemplo.
 
