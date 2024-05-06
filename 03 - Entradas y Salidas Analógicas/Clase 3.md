@@ -309,7 +309,7 @@ La señal **PWM** se define principalmente por tres componentes: *ciclo*, *ciclo
 
 El *ciclo de trabajo* o *Duty Cicle* (D), representa la relación entre el tiempo en que la señal está en un nivel alto (T1) y el ciclo completo de la señal (T). Es una relación porcentual y se puede calcular como: 
 
-$\text{Ciclo de Trabajo (D)}  = \frac{T1}{T} \text{.100\%}$
+$\text{Ciclo de Trabajo (D)}  = \frac{T1}{T} .100 \% $
 
 Por ejemplo, un *Duty Cycle* de 10% indica que la señal permanece en un estado alto (T1) el 10% de su ciclo completo (T). En la **Figura 19** se muestran más ejemplos de este concepto.
 
@@ -354,9 +354,13 @@ Incorporemos un ejemplo numérico como el que muestra en la **Figura 20**. Si el
 
 En ambos ejemplos, no hemos modificado el *ciclo* (y por ende tampoco la frecuencia) de la señal **PWM**, solo hemos trabajado sobre su **ciclo de trabajo**:
 
-$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,5[ms]+0,5[ms]} = \frac{1}{1[ms]} = 1000[Hz]   -\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,5[ms]}{1[ms]} \text{.100\%} = \text{50\%}$  
+$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,5[ms]+0,5[ms]} = \frac{1}{1[ms]} = 1000[Hz]$   
 
-$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,1ms]+0,9[ms]} = \frac{1}{1[ms]} = 1000[Hz] -\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,1[ms]}{1[ms]} \text{.100\%} = \text{10\%}$   
+$\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,5[ms]}{1[ms]} .100 \% = 50 \% $  
+
+$\text{f}  = \frac{1}{T} =  \frac{1}{T1+T2} =  \frac{1}{0,1ms]+0,9[ms]} = \frac{1}{1[ms]} = 1000[Hz]$
+
+$\text{Ciclo de Trabajo}  = \frac{T1}{T} .100 \% = \frac{0,1[ms]}{1[ms]} .100 \% = 10 \%$   
 
 Esta modulación es empleada para controlar la cantidad de energía que se envía a un dispositivo. Es una técnica muy utilizada para regular la velocidad de giro de los motores y como regulación de intensidad lumínica como en el ejemplo.
 
