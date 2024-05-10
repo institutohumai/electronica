@@ -361,7 +361,7 @@ Antes de comenzar a programar la **RPico W**, es necesario instalar y configurar
 
 **Thonny**, desarrollado por la *Universidad de Tartu* en Estonia, ofrece las herramientas necesarias para programar y cuenta con una interfaz simple e intuitiva, lo cual lo hace muy adecuado para principiantes.
 
-La instalación de **Thonny** es muy sencilla. Dado que ya está integrado con *Python 3.10*, solo necesitamos descargar un ejecutable. Para ello, basta con dirigirnos a la página oficial de **Thonny** y seleccionar el paquete de instalación correspondiente al sistema operativo que estemos utilizando de la esquina superior derecha de la página.
+La instalación es muy sencilla. Dado que ya está integrado con *Python 3.10*, solo necesitamos descargar un ejecutable. Para ello, basta con dirigirnos a la página oficial de [Thonny](https://thonny.org/) y seleccionar el paquete de instalación correspondiente al sistema operativo que estemos utilizando de la esquina superior derecha de la página.
 
 ![Figura 44 - Instalación De Thonny](./images/Figura44-InstalaciónDeThonny.jpg)  
 *Figura 44 - Instalación De Thonny*
