@@ -1,79 +1,105 @@
 {
     "1_Introduccion": {
-        "name": "Introducción",
+        "name": "Introducci\u00f3n",
         "video_urls": [
-            "https://youtu.be/0KDJrCEoKBo"
+            "https://www.youtube.com/embed/0KDJrCEoKBo"
         ],
         "long_description": {},
         "ipynbs": {
-            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/17E2ofo0wMbz-nBY9QZYGDbX2O8O7PCiO",
-            "Clase 1.ipynb": "https://colab.research.google.com/drive/14mNgW8J4dGmNjHO3J_v9jv8tpv-c8k1w"
+            "Clase 1.ipynb": "https://colab.research.google.com/drive/1jjIJA8vGI0HcbFZ0nTGRINWn-shD3Ptv"
         },
         "materials": {}
     },
     "2_Entradas_y_Salidas_Digitales": {
         "name": "Primeros pasos con nuestra RPico W. Entradas y salidas digitales",
         "video_urls": [
-            "https://youtu.be/VbUz9gZFvM4"
+            "https://www.youtube.com/embed/VbUz9gZFvM4"
         ],
         "long_description": {},
         "ipynbs": {
-            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/1jVp_ioBPlQ0YczxVen4RS3C3ILqNg8UW",
-            "Clase 2.ipynb": "https://colab.research.google.com/drive/1eEwHF8g4A50nJFoH1EXDNdmiyJ_KZeWS"
+            "Clase 2.ipynb": "https://colab.research.google.com/drive/1DS1A3FnG-2dA2IsmurFs8pz01s3jXi1g"
         },
-        "materials": {}
+        "materials": {
+            "Ejemplo1_LedOnBoard": "15mM7JVlg2zuN5liVKoQkpcxddNAwvMVQ",
+            "Ejemplo2_LedOnBoard": "1_2tOK68xKDmYPp_UVUjmCQR0aiNi7oH0",
+            "Ejemplo3_LedExterno": "1qqkWG6uMp7OBfotvB204T1newJgfBQ-K",
+            "Ejemplo4_LecturaPulsadorNA": "1d3Exfa6sLBRQMPqIjcIo9lw9JE3ErWYe",
+            "Ejemplo5_LEDyPulsadorNA": "10F7xZ0majrrRXOyrraKdZjJAZSi4ZHed",
+            "Ejemplo6_BuzzerActivo": "1WdIASdUe4zFji3LPMLs4pGNbGDQ8AUyD",
+            "Ejemplo7_SensorPir": "1t6z6wpG-Nc7xGs6CEHeXzUu1xAIM0r3v"
+        }
     },
     "3_Entradas_y_salidas_analogicas_ADC_PWM": {
-        "name": "Entradas y Salidas analógicas. Convertidor Analógico a Digital (ADC) y Modulación por Ancho de Pulso (PWM)",
+        "name": "Entradas y Salidas anal\u00f3gicas. Convertidor Anal\u00f3gico a Digital (ADC) y Modulaci\u00f3n por Ancho de Pulso (PWM)",
         "video_urls": [
-            "https://youtu.be/fUrCsw-mrYc"
+            "https://www.youtube.com/embed/fUrCsw-mrYc"
         ],
         "long_description": {},
         "ipynbs": {
-            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/1GDAIAa0a9vcvgBbGJmpRcVAph1s3pwgc",
-            "Clase 3.ipynb": "https://colab.research.google.com/drive/12Asb0oqEwI3ooEHPNv7MlBLEc7bxXVKh"
+            "Clase 3.ipynb": "https://colab.research.google.com/drive/1IIrmTDcF_kRqQO904vZrA26Y3gBp1zWa"
         },
-        "materials": {}
+        "materials": {
+            "Ejemplo10_BreathingLED": "1rgBzRoXqQfhU87yUNzObLLje85LlumH1",
+            "Ejemplo11_ControlADCyPWM": "1uUg94LqYHzQ2UrBfBymWdJVIfrgh12xZ",
+            "Ejemplo7_LecturaPotenciometro": "12_MjIbgdBodADr3TERU_ImUjEAanVYU2",
+            "Ejemplo8_LecturaPotenciometroConversion": "1iE9OIIe7Wwi599RMT0YRL-Bt-ocOif8r",
+            "Ejemplo9_LecturaTemperaturaRP2040": "1Jmw0RDrw7rcutZ7dupHYAT8ciPj6Lh-4"
+        }
     },
     "4_Protocolos_de_comunicacion_serie": {
-        "name": "Protocolos de comunicación serie",
+        "name": "Protocolos de comunicaci\u00f3n serie",
         "video_urls": [
-            "https://youtu.be/ME4xvSW4z00"
+            "https://www.youtube.com/embed/ME4xvSW4z00"
         ],
         "long_description": {},
         "ipynbs": {
-            "Actualizaci\u00f3n_2023.ipynb": "https://colab.research.google.com/drive/15XbsCjXKJsyNTeLxMjNE0Hp7loYvAAj5",
-            "Clase 4.ipynb": "https://colab.research.google.com/drive/1IEDIMdUUQK8tkaKUGVylTbDGYd47W9Cw"
+            "Clase 4.ipynb": "https://colab.research.google.com/drive/1uQDAWPzN8V9eKIA3927fZ893YslZLgS5"
         },
-        "materials": {}
+        "materials": {
+            "Ejemplo12_ObtenerDirecci\u00f3nI2C": "1U_gsiS0-d5eXqb2zriJCaeq5GzmHOjM9",
+            "Ejemplo13_HolaMundoDisplayLCD": "1IaYf3EZ5C5gbUTnLFLlJ-kphfZlcudGA",
+            "Ejemplo14_LecturayVisualizaci\u00f3nTemperaturaRP2040": "1gXgslPtZGQHsTx_nLMrOjIJSQQ8g_Nt4",
+            "Ejemplo15_LecturayVisualizaci\u00f3nPotenci\u00f3metro": "1YlO748QSEj9J96nwfMyyJeOY-Uxl9YyJ"
+        }
     },
     "5_Almacenamiento_de_datos": {
         "name": "Almacenamiento de datos",
         "video_urls": [
-            "https://youtu.be/O_q1ZMjlRA0"
+            "https://www.youtube.com/embed/O_q1ZMjlRA0"
         ],
         "long_description": {},
         "ipynbs": {
-            "Clase 5.ipynb": "https://colab.research.google.com/drive/1u-Am85FnkDsDGSgl3dL4SvHL0jztB2AH"
+            "Clase 5": "https://colab.research.google.com/drive/1NpTQNosM3qmno0uvHAcCzL1mhRaA-xOM",
+            "Clase 5.ipynb": "https://colab.research.google.com/drive/1NpTQNosM3qmno0uvHAcCzL1mhRaA-xOM"
         },
-        "materials": {}
+        "materials": {
+            "Ejemplo16_DataLogger": "1G-pGDFls0dOnhLzpmJcfKVTZyG0vN6-X",
+            "Ejemplo17_DataLoggerCompleto": "1kKaZn6quCU37CB09UC8Av52rYmmJsD1o"
+        }
     },
     "8_TFI_22": {
         "name": "08-TFI_22'",
         "video_urls": [],
         "long_description": {},
         "ipynbs": {
-            "TFI_22.ipynb": "https://colab.research.google.com/drive/1dOOH14d7L0sSEKBHQI0wWJqk_RHCmgyL"
+            "TFI_22": "https://colab.research.google.com/drive/1m7-1glaEM_ReQnOzNgQGJOuXfVsbCCVe",
+            "TFI_22.ipynb": "https://colab.research.google.com/drive/1m7-1glaEM_ReQnOzNgQGJOuXfVsbCCVe"
         },
-        "materials": {}
+        "materials": {
+            "Ejemplo16_TFI_LecturaDHT11": "1VJoAvAICfZHOirZs41YrgpqqyrTKrrgt"
+        }
     },
     "8_TFI_23": {
         "name": "08-TFI_23'",
         "video_urls": [],
         "long_description": {},
         "ipynbs": {
-            "Clase 8.ipynb": "https://colab.research.google.com/drive/1WY5t-rcNrM3dPhvnoeEKWLKOFGozdXCR"
+            "Clase 8": "https://colab.research.google.com/drive/1MlpvKq3vLH5ua5QNiGNyS9U0UeZ6oJ7d",
+            "Clase 8.ipynb": "https://colab.research.google.com/drive/1MlpvKq3vLH5ua5QNiGNyS9U0UeZ6oJ7d"
         },
-        "materials": {}
+        "materials": {
+            "Ejemplo21_LecturaBMP280": "1FXJLH13XQ05mnt7_Nx8wgHHGK283G3Hd",
+            "Ejemplo22_Env\u00edoDeDatosaCloudStudio": "1umYmKJZJF42B8jPiGYjcGpyix_s1nLbW"
+        }
     }
 }
