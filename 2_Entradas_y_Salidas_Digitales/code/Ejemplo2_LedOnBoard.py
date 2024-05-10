@@ -8,4 +8,3 @@ LED_onboard = Pin("LED", Pin.OUT)  # LED_onboard = Pin(25, Pin.OUT) si empleamos
 while True:
     LED_onboard.toggle()
     sleep(5)
-
