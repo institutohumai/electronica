@@ -421,8 +421,8 @@ Algunos dispositivos que utilizan **UART** para su funcionamiento son el *Módul
 
 ### 4.8.1 Descripción de las señales
 
-![Figura 23 - ](./images/Figura23-.jpg)  
-*Figura 23 - *
+![Figura 23 - Descripción-Señales](./images/Figura23-Descripción-Señales.jpg)  
+*Figura 23 - Descripción de las señales*
 
 ### 4.8.2 Implementación en nuestra RPico W
 
