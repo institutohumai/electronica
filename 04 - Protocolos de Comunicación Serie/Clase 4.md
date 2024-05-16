@@ -412,7 +412,11 @@ Sin embargo, encontrarás una leve modificación en los nombres de los pines. En
 
 ## 4.8 Protocolo de comunicación UART
 
-**UART** es uno de los primeros y más simples protocolos *serie* para intercambiar datos entre dos dispositivos. A diferencia de **I2C** y **SPI** ->> TERMINAR 
+**UART** es uno de los primeros y más simples **protocolos de comunicación** *serie* para el intercambio de datos entre dos dispositivos. A diferencia de **I2C** y **SPI**, la comunicación **UART** se realiza de forma *asíncrona*, es decir, no requiere una señal de reloj para sincronizar la comunicación entre los dispositivos.
+
+Al no necesitar una fuente de reloj común entre el transmisor y el receptor, ambos lados operan según sus relojes independientes. Sin embargo, existe un concepto clave llamado *tasa de baudios*, que ayuda a mantener sincronizados estos dispositivos al definir la velocidad de intercambio de datos.
+
+La *tasa de baudios* se refiere a la cantidad de bits de datos transmitidos por segundo. Por lo tanto, los dispositivos que se comuniquen empleando **UART** deben funcionar a la misma *tasa de baudios* para asegurar un funcionamiento correcto. El valor de *9600 baudios* es el más ampliamente aceptado en la industria de la electrónica y es soportado por casi todos los dispositivos que utilizan **UART** para comunicarse.
 
 Algunos dispositivos que utilizan **UART** para su funcionamiento son el *Módulo Bluetooth HC-05* y el *Módulo GPS NEO-6M*. 
 
@@ -421,8 +425,10 @@ Algunos dispositivos que utilizan **UART** para su funcionamiento son el *Módul
 
 ### 4.8.1 Descripción de las señales
 
-![Figura 23 - ](./images/Figura23-.jpg)  
-*Figura 23 - *
+**UART** utiliza únicamente dos señales, conocidas como *Rx* y *Tx*. El pin *Tx* de un dispositivo transmite datos al pin *Rx* de otro dispositivo, y viceversa: el pin *Tx* de este último transmite datos al pin *Rx* del dispositivo anterior. Este intercambio de datos se aprecia en la **Figura 23**. Como podrás observar, solo dos dispositivos pueden comunicarse de forma simultánea, lo que representa la principal limitación de **UART**.
+
+![Figura 23 - Arquitectura UART](./images/Figura23-ArquitecturaUART.jpg)  
+*Figura 23 - Arquitectura UART*
 
 ### 4.8.2 Implementación en nuestra RPico W
 
@@ -433,4 +439,12 @@ Para la implementación de este protocolo debemos utilizar los pines específico
 
 ## 4.9 Conclusión y resumen
 
-Entonces, ¿cuál es el mejor **protocolo de comunicación serie**? Lamentablemente, no existe uno que podamos llamar "el mejor". Como hemos visto, cada uno tiene sus propias ventajas y desventajas, por lo que cada usuario deberá elegir según sus necesidades. Habrá alguno que se adapte mejor a tu proyecto, o simplemente ya tengas a disposición un componente con **I2C** o **SPI**. Si deseamos conectar muchos dispositivos sin que sea demasiado complejo, **I2C** será la elección ideal, ya que puede conectar hasta 127 dispositivos y es fácil de administrar. Por otro lado, si deseamos mayor velocidad de transmisión, **SPI** será la elección correcta.
+Entonces, ¿cuál es el mejor **protocolo de comunicación serie**? Lamentablemente, no existe uno que podamos llamar "el mejor". Como hemos visto, cada uno tiene sus propias ventajas y desventajas, por lo que cada usuario deberá elegir según sus necesidades. Puede que uno se adapte mejor a tu proyecto, o quizás ya tengas a disposición un componente con **I2C**, **SPI** o **UART**.
+
+Si te encuentras indeciso sobre cuál protocolo es el adecuado para tu proyecto, se recomiendan estos breves consejos:
+
+1. Cuando priorices la velocidad de transferencia de datos, el protocolo **SPI** será tu mejor opción de comunicación.
+
+2. Si tu proyecto implica la comunicación con varios dispositivos y deseas mantener una conexión cableada relativamente simple, la elección preferida sería el protocolo **I2C**.
+
+3. Si tu proyecto se centra únicamente en la transferencia de datos entre dos dispositivos de forma transparente, **UART** es la solución más simple y rentable, especialmente para aplicaciones con recursos de hardware limitados.
