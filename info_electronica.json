@@ -1,4 +1,20 @@
 {
+    "0_Fundamentos_de_API": {
+        "name": "Fundamentos de API",
+        "video_urls": [
+            "https://www.youtube.com/watch?v=-ZYXx-rKuUA",
+            "https://www.youtube.com/watch?v=zxSvhKeeXwc",
+            "https://www.youtube.com/watch?v=xXbKjti5gHQ",
+            "https://www.youtube.com/watch?v=ZtVICggkhIM",
+            "https://www.youtube.com/watch?v=Zp09fwObSfs"
+        ],
+        "long_description": {},
+        "ipynbs": {
+            "Clase 0.ipynb": "https://colab.research.google.com/drive/1TsQUHgA8onMmAf2wRoHzwOuXBT1kXKpS",
+            "ejercicios": "https://colab.research.google.com/drive/1GTFL_Bvl_7X9OJP9bIDHSGv_Xs3domrF"
+        },
+        "materials": {}
+    },
     "1_Introduccion": {
         "name": "Introducci\u00f3n",
         "video_urls": [
