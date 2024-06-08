@@ -29,58 +29,57 @@ Recordemos que un sensor es un dispositivo diseñado para detectar magnitudes f�
 ![Figura 03 - Señal de Salida de los Sensores](./images/Figura03-SeñaldeSalidadelosSensores.jpg)  
 *Figura 03 - Señal de Salida de los Sensores*
 
-En la *Clase N°3*, mencionamos un *sensor analógico* de temperatura muy conocido, el [LM35](https://www.ti.com/lit/ds/symlink/lm35.pdf). También empleamos el sensor de temperatura interno del *RP2040*, que es otro ejemplo de *sensor analógico*. Observamos el proceso de lectura del valor medido y las conversiones necesarias. Es importante resaltar que siempre utilizamos las **entradas analógicas** de nuestra **RPico W**, las cuales están conectadas a los **ADCs** del *RP2040*.
+En la *Clase N°3*, mencionamos un *sensor analógico* de temperatura muy conocido, el [LM35](https://www.ti.com/lit/ds/symlink/lm35.pdf). También empleamos el sensor de temperatura interno del *RP2040*, que es otro ejemplo de *sensor analógico*. Observamos el proceso de lectura del valor medido y las conversiones necesarias. Es importante resaltar que siempre utilizamos las *entradas analógicas* de nuestra **RPico W**, las cuales están conectadas a los **ADCs** del *RP2040*.
 
 ![Figura 04 - LM35](./images/Figura04-LM35.jpg)  
 *Figura 04 - LM35*
 
----> Acá  
-Sin embargo, para este *TFI*, utilizaremos un *sensor digital* como lo son el *DHT11*, o su variante más costosa, el *DHT22*. Estos sensores, además de medir la temperatura y la humedad relativa del ambiente, nos proporcionan una *salida digital*, volviéndolos más fáciles de implementar, ya que no necesitamos recurrir a las entradas analógicas de nuestro microcontrolador para realizar la lectura del valor medido. Además, son muy populares gracias a sus buenas prestaciones, bajo costo y fácil implementación.
+Sin embargo, para este *TFI* emplearemos un *sensor digital* como el *DHT11* o su variante más costosa, el *DHT22*. Estos sensores, además de medir la temperatura y la humedad relativa del ambiente, proporcionan una *salida digital*, lo que facilita su implementación. Esto se debe a que no es necesario utilizar las *entradas analógicas* del microcontrolador para leer los valores medidos. Además, estos sensores son muy populares debido a sus buenas prestaciones y bajo costo.
 
-Si bien ambos sensores lucen físicamente similares (varían en tamaño y color), y tienen la misma identificación de pines, poseen características diferentes que deben consultarse en las hojas de datos correspondientes [DHT11 Humidity & Temperature Sensor](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf) y [DHT22 Humidity & Temperature Sensor](https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf). De todas ellas, las diferencias más significativas se listan en la **Figura 04**.
+Si bien ambos sensores lucen físicamente similares (varían en tamaño y color), y tienen la misma identificación de pines, poseen características diferentes que deben consultarse en las hojas de datos correspondientes:[DHT11 Humidity & Temperature Sensor](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf) y [DHT22 Humidity & Temperature Sensor](https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf). De todas ellas, las diferencias más significativas se enumeran en la **Figura 05**.
 
-![Figura 04 - Diferencias DHT11 y DHT22](./images/Figura04-DiferenciasDHT11yDHT22.jpg)  
-*Figura 04 - Diferencias DHT11 y DHT22*
+![Figura 05 - Diferencias DHT11 y DHT22](./images/Figura05-DiferenciasDHT11yDHT22.jpg)  
+*Figura 05 - Diferencias DHT11 y DHT22*
 
-Como vemos, el tiempo de respuesta (es decir, el tiempo que tarda el sensor en ofrecer una lectura válida de la variable que esta midiendo), es menor en el *DHT11*. Sin embargo, el DHT22 tiene rangos de medida más amplios y mejor resolución, a cambio de resultar algo más caro. También observaremos, que ambos modelos pueden alimentarse con los pines que posee la *RPico*; *VBUS* si deseamos hacerlo con 5[Voltios] o *3V3(OUT)* si deseamos hacerlo con 3,3[Voltios]. 
+Como se observa, el tiempo de respuesta (es decir, el tiempo que tarda el sensor en ofrecer una lectura válida de la variable que está midiendo) es menor en el *DHT11*. Sin embargo, el *DHT22* tiene rangos de medida más amplios y mejor resolución, a cambio de ser algo más caro. También observamos que ambos modelos pueden alimentarse con los pines de la **RPico W**: *VBUS* si se desea usar 5[Voltios] o *3V3(OUT)* si se desea usar 3,3[Voltios].
 
-La elección de un modelo u otro, dependerá del tipo de proyecto que queramos llevar a cabo. Para nuestro caso, la elección del *DHT11* es suficiente.
+La elección entre uno u otro modelo dependerá del tipo de proyecto que deseemos llevar a cabo. En nuestro caso, la elección del *DHT11* es suficiente.
 
 ## 6.2 Sensores DHT11 y DHT22: Pinout y conexión 
 
-En ambos sensores, los pines tienen el mismo orden y función (Figura 05). Si los miramos de frente y los enumeramos de izquierda a derecha, el primer pin es VCC, y lo conectaremos a los 5[Voltios] o 3,3[Voltios] de la *RPico*. En el otro extremo tenemos el pin 4 y es el GND, que irá conectado a un pin GND de la *RPico*. El pin 2 (DATA), es el que nos entregará la información de la temperatura y la humedad, y debe estar conectado a una **entrada digital** de la *RPico*. Y finalmente tenemos el pin 3 (NC), que no se utiliza debido a que no posee conexión eléctrica de ningún tipo. 
+En ambos sensores, los pines tienen el mismo orden y función (Figura 06). Si los miramos de frente y los enumeramos de izquierda a derecha, el primer pin es VCC, y lo conectaremos a los 5[Voltios] o 3,3[Voltios] de la *RPico*. En el otro extremo tenemos el pin 4 y es el GND, que irá conectado a un pin GND de la *RPico*. El pin 2 (DATA), es el que nos entregará la información de la temperatura y la humedad, y debe estar conectado a una **entrada digital** de la *RPico*. Y finalmente tenemos el pin 3 (NC), que no se utiliza debido a que no posee conexión eléctrica de ningún tipo. 
 
-![Figura 05 - Pinout DHT11 y DHT22](./images/Figura05-PinoutDHT11yDHT22.jpg)  
-*Figura 05 - Pinout DHT11 y DHT22*
+![Figura 06 - Pinout DHT11 y DHT22](./images/Figura06-PinoutDHT11yDHT22.jpg)  
+*Figura 06 - Pinout DHT11 y DHT22*
 
 Revisando las hojas de datos, veremos que en ambos modelos se debe colocar una resistencia entre el pin VCC y el pin DATA, cuyo valor debe estar entre 4700[Ohmios] y 10000[Ohmios], para que la lectura se realice sin problemas (el valor de la resistencia depende de la longitud del cable que conecta el sensor con la *RPico*). Esta configuración para una **entrada digital** ya la hemos visto en la Clase N°2: se trata de una *Resistencia Pull_Up* (Figura 06).
 
-![Figura 06 - Esquema de Conexión DHT11 y DHT22](./images/Figura06-EsquemaDeConexiónDHT11yDHT22.jpg)  
-*Figura 06 - Esquema de Conexión DHT11 y DHT22*
+![Figura 07 - Esquema de Conexión DHT11 y DHT22](./images/Figura07-EsquemaDeConexiónDHT11yDHT22.jpg)  
+*Figura 07 - Esquema de Conexión DHT11 y DHT22*
 
 Debido a que el *DHT11* y *DHT22* poseen el mismo pinout, **las conexiones que realicemos para uno, son equivalentes para el otro**. Un ejemplo de conexión se muestra en la Figura 07. Como se puede ver, la alimentación del sensor está tomada del pin *3V3* (pin físico 36) y *GND* (pin físico 38), mientras que los datos se leen usando el pin *GP15* como entrada (pin físico 20).
 
 Recordemos que la *RPico* incluye una resistencia programable integrada conectada a cada pin *GPIO*, que puede configurarse como resistencia *Pull_Down* o *Pull_Up* de acuerdo a nuestras necesidades, lo que nos ahorra la conexión de una resistencia física externa, reduciendo así la cantidad de elementos de nuestro circuito. Pero también recordemos, que por defecto, todos los pines están en *flotante*, por lo que debemos indicar *explícitamente* la configuración escogida en la función *Pin()*. Si no se indica al momento de la configuración del pin que utilicemos como entrada, debemos colocar la *Resistencia Pull_Up* externa como se indicó en la Figura 06. 
 
-![Figura 07 - Conexión DHT22](./images/Figura07-ConexiónDHT22.jpg)  
-*Figura 07 - Conexión DHT22*
+![Figura 08 - Conexión DHT22](./images/Figura08-ConexiónDHT22.jpg)  
+*Figura 08 - Conexión DHT22*
 
 Por otro lado, también es posible adquirir el *módulo sensor DHT11 (o DHT22)*. De forma similar a como ocurría con los zumbadores, este módulo incorpora el sensor correspondiente en una pequeña placa impresa. La diferencia entre ambos es que el módulo ya contiene una *Resistencia Pull_Up* incorporada. 
 
 Algunos modelos también incluyen un pequeño capacitor en su parte posterior, que hace las veces de *filtro eléctrico* (es decir, para mitigar señales eléctricas externas no deseadas), y otros cuentan con un pequeño *LED* que nos avisa de su funcionamiento. (Figura 08)
 
-![Figura 08 - Modelos del Módulo Sensor DHT11](./images/Figura08-ModelosDelMóduloSensorDHT11.jpg)  
-*Figura 08 - Modelos Del Módulo Sensor DHT11*
+![Figura 09 - Modelos del Módulo Sensor DHT11](./images/Figura09-ModelosDelMóduloSensorDHT11.jpg)  
+*Figura 09 - Modelos Del Módulo Sensor DHT11*
 
 En cualquiera de los modelos del *módulo sensor DHT11 (o DHT22)* que tengamos, veremos que el *Pin NC* de la Figura 05 ya no se encuentra, y que solamente expone los pines necesarios para su funcionamientos (Figura 09): *VCC* o *+*, *DATA* o *OUT*, y *GND* o *-*. De igual manera, siempre debemos prestar atención a la serigrafía impresa, para no confundirnos al momento de realizar las conexiones correspondientes.
 
-![Figura 09 - Pinout Módulo Sensor DHT11](./images/Figura09-PinoutMóduloSensorDHT11.jpg)  
-*Figura 09 - Pinout Módulo Sensor DHT11*
+![Figura 10 - Pinout Módulo Sensor DHT11](./images/Figura10-PinoutMóduloSensorDHT11.jpg)  
+*Figura 10 - Pinout Módulo Sensor DHT11*
 
 Un ejemplo de conexión del *módulo sensor DHT11 (o DHT22)* a nuestra *RPico* se muestra en la Figura 10. Como se puede observar, la alimentación del sensor está tomada del pin *3V3* (pin físico 36) y *GND* (pin físico 38), mientras que los datos se leen usando el pin *GP28* como entrada (pin físico 34).
 
-![Figura 10 - Conexión Módulo Sensor DHT11](./images/Figura10-ConexiónMóduloSensorDHT11.jpg)  
-*Figura 10 - Conexión Módulo Sensor DHT11*
+![Figura 11 - Conexión Módulo Sensor DHT11](./images/Figura11-ConexiónMóduloSensorDHT11.jpg)  
+*Figura 11 - Conexión Módulo Sensor DHT11*
 
 ## 6.3 Sensores DHT11 y DHT22: Transmisión de datos
 
@@ -90,8 +89,8 @@ Sin embargo, ambos sensores no utilizan un protocolo de comunicación estándar 
 
 En resumen, podemos decir que, una vez realizado el proceso de conversión de analógico a digital, se establece un proceso de comunicación y sincronización entre la *RPico* y el sensor, en el cual este último envía una trama de datos de 40 bits (5 bytes) correspondientes a la información de humedad y temperatura como se muestra en la Figura 11.
 
-![Figura 11 - Formato de datos DHT11](./images/Figura11-FormatoDeDatosDHT11.jpg)  
-*Figura 11 - Formato de datos DHT11*
+![Figura 12 - Formato de datos DHT11](./images/Figura12-FormatoDeDatosDHT11.jpg)  
+*Figura 12 - Formato de datos DHT11*
 
 Como vemos, estos datos se interpretan de la siguiente manera:
 
@@ -103,8 +102,8 @@ Como vemos, estos datos se interpretan de la siguiente manera:
 
 Este último byte se utiliza para corroborar que no existan datos corruptos en una transmisión de datos. Si la información recibida es correcta, al sumar los cuatro primeros grupos de bytes, el resultado debe ser igual al quinto byte. Tomemos como ejemplo la Figura 12, donde nuestra *RPico* ha recibido una trama como la ilustrada allí.
 
-![Figura 12 - Ejemplo Trama de Datos DHT11](./images/Figura12-EjemploTramadeDatosDHT11.jpg)  
-*Figura 12 - Ejemplo Trama de Datos DHT11*
+![Figura 13 - Ejemplo Trama de Datos DHT11](./images/Figura13-EjemploTramadeDatosDHT11.jpg)  
+*Figura 13 - Ejemplo Trama de Datos DHT11*
 
 Como dijimos, sumando los cuatro primeros grupos de bytes, debemos obtener el quinto. Si nos centramos en la trama de la Figura 12, comprobaremos que el dato recibido es correcto, ya que:
 
@@ -117,8 +116,8 @@ Si volvemos a la hoja de datos, además de la trama, observaremos también, que 
 
 Por suerte, la versión actual de **MicroPython** ya cuenta con librerías para este sensor, algo que nos permite ahorrar mucho tiempo de programación. Si queremos comprobar esto, nos situamos en la consola de Thonny con la *RPico* conectada y escribimos la instrucción *help("modules")* y veremos la librería *dht* correspondiente.
 
-![Figura 13 - Librería dht en MicroPython](./images/Figura13-LibreríadhtenMicroPython.jpg)  
-*Figura 13 - Librería dht en MicroPython*
+![Figura 14 - Librería dht en MicroPython](./images/Figura14-LibreríadhtenMicroPython.jpg)  
+*Figura 14 - Librería dht en MicroPython*
 
 ## 6.4 TFI - Parte I: Puesta en marcha y lectura de valores
 
@@ -164,26 +163,32 @@ Para finalizar, se imprimen los valores obtenidos en la consola, utilizando la f
 ```
 Cuando ejecutes el código (ver *Ejemplo16_TFI_LecturaDHT11.py* en el repositorio), verás un mensaje como el de la Figura 14.
 
-![Figura 14 - Lectura sensor DHT11](./images/Figura14-LecturaSensorDHT11.jpg)  
-*Figura 14 - Lectura sensor DHT11*
+![Figura 15 - Lectura sensor DHT11](./images/Figura15-LecturaSensorDHT11.jpg)  
+*Figura 15 - Lectura sensor DHT11*
 
 Puedes comprobar el correcto funcionamiento cambiando las condiciones del espacio próximo al sensor, siempre con el debido cuidado de no dañar ningún componente. Por ejemplo, acerca la boca de un termo con agua caliente en su interior, y notarás que el vapor que sale modificará ambos valores.
 
 ## 6.5 TFI - Parte II: Visualizar datos medidos (Actividad N°1)
 
-![Figura 15 - TFI - Parte II](./images/Figura15-TFIParteII.jpg)  
-*Figura 15 - TFI - Parte II*
+![Figura 16 - TFI - Parte II](./images/Figura16-TFIParteII.jpg)  
+*Figura 16 - TFI - Parte II*
 
 Ahora les toca a ustedes...
 
 Como primera actividad, deben incorporar el *display LCD1602* al circuito que realizaron en la Parte I, y visualizar allí los datos de temperatura y humedad relativa. Recuerden que disponen de 16 caracteres por renglón. El resultado debe ser como el de la Figura 16.
 
-![Figura 16 - TFI - Parte II - Ejemplo](./images/Figura16-TFIParteIIEjemplo.jpg)  
-*Figura 16 - TFI - Parte II - Ejemplo*
+![Figura 17 - TFI - Parte II - Ejemplo](./images/Figura17-TFIParteIIEjemplo.jpg)  
+*Figura 17 - TFI - Parte II - Ejemplo*
 
 Importante: El símbolo de grados "°" es un caracter especial y se escribe en el display mediante la instrucción *lcd.putstr(chr(223))*.
 
 ## 6.7 TFI - Parte III: Actuar (Actividad N°2)
+
+En la segunda actividad, agregarán una función de alarma a su pequeña *estación meteorológica*, la cual se activará cuando se cumpla una determinada condición. Para lograr esto, deben añadir un componente adicional al circuito de la Actividad N°1, ya sea un *LED* para una alarma lumínica o el *módulo buzzer* para una alarma sonora. La elección de qué tipo de alarma implementar queda a su criterio.
+
+La condición a cumplir es que se accione cuando la temperatura sea superior a 40[°C].
+
+¡Manos a la obra!
 
 ## 6.8 TFI - Parte IV: Almacenar (Actividad N°3)
 
