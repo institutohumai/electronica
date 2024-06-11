@@ -36,7 +36,7 @@ En la *Clase N°3*, mencionamos un *sensor analógico* de temperatura muy conoci
 
 Sin embargo, para este *TFI* emplearemos un *sensor digital* como el *DHT11* o su variante más costosa, el *DHT22*. Estos sensores, además de medir la temperatura y la humedad relativa del ambiente, proporcionan una *salida digital*, lo que facilita su implementación. Esto se debe a que no es necesario utilizar las *entradas analógicas* del microcontrolador para leer los valores medidos. Además, estos sensores son muy populares debido a sus buenas prestaciones y bajo costo.
 
-Si bien ambos sensores lucen físicamente similares (varían en tamaño y color), y tienen la misma identificación de pines, poseen características diferentes que deben consultarse en las hojas de datos correspondientes:[DHT11 Humidity & Temperature Sensor](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf) y [DHT22 Humidity & Temperature Sensor](https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf). De todas ellas, las diferencias más significativas se enumeran en la **Figura 05**.
+Si bien ambos sensores lucen físicamente similares (varían en tamaño y color), y tienen la misma identificación de pines, poseen características diferentes que deben consultarse en las hojas de datos correspondientes: [DHT11 Humidity & Temperature Sensor](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf) y [DHT22 Humidity & Temperature Sensor](https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf). De todas ellas, las diferencias más significativas se enumeran en la **Figura 05**.
 
 ![Figura 05 - Diferencias DHT11 y DHT22](./images/Figura05-DiferenciasDHT11yDHT22.jpg)  
 *Figura 05 - Diferencias DHT11 y DHT22*
@@ -47,50 +47,56 @@ La elección entre uno u otro modelo dependerá del tipo de proyecto que deseemo
 
 ## 6.2 Sensores DHT11 y DHT22: Pinout y conexión 
 
-En ambos sensores, los pines tienen el mismo orden y función (Figura 06). Si los miramos de frente y los enumeramos de izquierda a derecha, el primer pin es VCC, y lo conectaremos a los 5[Voltios] o 3,3[Voltios] de la *RPico*. En el otro extremo tenemos el pin 4 y es el GND, que irá conectado a un pin GND de la *RPico*. El pin 2 (DATA), es el que nos entregará la información de la temperatura y la humedad, y debe estar conectado a una **entrada digital** de la *RPico*. Y finalmente tenemos el pin 3 (NC), que no se utiliza debido a que no posee conexión eléctrica de ningún tipo. 
+En ambos sensores, los pines tienen el mismo orden y función (**Figura 06**). Si miramos los sensores de frente y enumeramos los pines de izquierda a derecha, el primer pin es *VCC*, que conectaremos a los 5 [voltios] o 3,3 [voltios] de la **RPico W**. En el otro extremo tenemos el pin 4, que es el *GND*, y lo conectaremos a un pin *GND* de la **RPico W**. El pin 2 (*DATA*) es el que nos entregará la información de la temperatura y la humedad, y debe estar conectado a una **entrada digital** de la **RPico W**. Finalmente, el pin 3 (*NC*) no se utiliza, ya que no posee conexión eléctrica de ningún tipo.  
 
 ![Figura 06 - Pinout DHT11 y DHT22](./images/Figura06-PinoutDHT11yDHT22.jpg)  
 *Figura 06 - Pinout DHT11 y DHT22*
 
-Revisando las hojas de datos, veremos que en ambos modelos se debe colocar una resistencia entre el pin VCC y el pin DATA, cuyo valor debe estar entre 4700[Ohmios] y 10000[Ohmios], para que la lectura se realice sin problemas (el valor de la resistencia depende de la longitud del cable que conecta el sensor con la *RPico*). Esta configuración para una **entrada digital** ya la hemos visto en la Clase N°2: se trata de una *Resistencia Pull_Up* (Figura 06).
+Revisando las hojas de datos, observamos que en ambos modelos se debe colocar una resistencia entre el pin *VCC* y el pin *DATA*, cuyo valor debe estar entre 4700 [ohmios] y 10000 [ohmios], para que la lectura se realice sin problemas. El valor de la resistencia depende de la longitud del cable que conecta el sensor con la **RPico W**, siendo 5000 [ohmios] el valor recomendado para una longitud de cable de hasta 20 [metros]. Esta configuración para una **entrada digital** ya la hemos visto en la Clase N°2: se trata de una *Resistencia Pull-Up* (**Figura 07**).
 
 ![Figura 07 - Esquema de Conexión DHT11 y DHT22](./images/Figura07-EsquemaDeConexiónDHT11yDHT22.jpg)  
 *Figura 07 - Esquema de Conexión DHT11 y DHT22*
 
-Debido a que el *DHT11* y *DHT22* poseen el mismo pinout, **las conexiones que realicemos para uno, son equivalentes para el otro**. Un ejemplo de conexión se muestra en la Figura 07. Como se puede ver, la alimentación del sensor está tomada del pin *3V3* (pin físico 36) y *GND* (pin físico 38), mientras que los datos se leen usando el pin *GP15* como entrada (pin físico 20).
-
-Recordemos que la *RPico* incluye una resistencia programable integrada conectada a cada pin *GPIO*, que puede configurarse como resistencia *Pull_Down* o *Pull_Up* de acuerdo a nuestras necesidades, lo que nos ahorra la conexión de una resistencia física externa, reduciendo así la cantidad de elementos de nuestro circuito. Pero también recordemos, que por defecto, todos los pines están en *flotante*, por lo que debemos indicar *explícitamente* la configuración escogida en la función *Pin()*. Si no se indica al momento de la configuración del pin que utilicemos como entrada, debemos colocar la *Resistencia Pull_Up* externa como se indicó en la Figura 06. 
+Debido a que el *DHT11* y el *DHT22* poseen el mismo pinout, **las conexiones que realicemos para uno son equivalentes para el otro**. Un ejemplo de conexión se muestra en la **Figura 08**. Como se puede ver, la alimentación del sensor se toma del pin *3V3* (pin físico 36) y *GND* (pin físico 38), mientras que los datos se leen usando el pin *GP15* como entrada (pin físico 20).
 
 ![Figura 08 - Conexión DHT22](./images/Figura08-ConexiónDHT22.jpg)  
 *Figura 08 - Conexión DHT22*
 
-Por otro lado, también es posible adquirir el *módulo sensor DHT11 (o DHT22)*. De forma similar a como ocurría con los zumbadores, este módulo incorpora el sensor correspondiente en una pequeña placa impresa. La diferencia entre ambos es que el módulo ya contiene una *Resistencia Pull_Up* incorporada. 
+Recordemos que la **RPico** W incluye una resistencia programable integrada conectada a cada pin *GPIO*, que puede configurarse como resistencia *Pull-Down* o *Pull-Up* de acuerdo a nuestras necesidades. Esto nos ahorra la conexión de una resistencia física externa, reduciendo así la cantidad de elementos en nuestro circuito. Además, por defecto, todos los pines están en *flotante*, por lo que debemos indicar explícitamente la configuración escogida en la función *Pin()*. Si no se especifica la configuración del pin como entrada, será necesario colocar la *Resistencia Pull-Up* externa, tal como se indicó en la **Figura 07**.
 
-Algunos modelos también incluyen un pequeño capacitor en su parte posterior, que hace las veces de *filtro eléctrico* (es decir, para mitigar señales eléctricas externas no deseadas), y otros cuentan con un pequeño *LED* que nos avisa de su funcionamiento. (Figura 08)
+Por otro lado, también es posible adquirir el *módulo sensor DHT11 (o DHT22)*. De forma similar a como ocurre con los *módulos buzzer*, este módulo sensor incorpora el *DHT11* en una pequeña placa impresa, junto con la *Resistencia Pull-Up* mencionada (generalmente de 5100 [ohmios]) y un pequeño capacitor que actúa como filtro eléctrico para mitigar señales eléctricas externas no deseadas. Algunos modelos del *módulo sensor DHT11* también cuentan con un pequeño LED que se enciende al alimentar el módulo, con su correspondiente *resistencia limitadora de corriente* (generalmente de 1000 [ohmios]).
 
 ![Figura 09 - Modelos del Módulo Sensor DHT11](./images/Figura09-ModelosDelMóduloSensorDHT11.jpg)  
 *Figura 09 - Modelos Del Módulo Sensor DHT11*
 
-En cualquiera de los modelos del *módulo sensor DHT11 (o DHT22)* que tengamos, veremos que el *Pin NC* de la Figura 05 ya no se encuentra, y que solamente expone los pines necesarios para su funcionamientos (Figura 09): *VCC* o *+*, *DATA* o *OUT*, y *GND* o *-*. De igual manera, siempre debemos prestar atención a la serigrafía impresa, para no confundirnos al momento de realizar las conexiones correspondientes.
+En cualquiera de los modelos del *módulo sensor DHT11 (o DHT22)* que tengamos, notaremos que el *Pin NC* de la **Figura 06** ya no está presente, y que solo expone los pines necesarios para su funcionamiento, como se aprecia en la **Figura 10**: *VCC* o *+*, *DATA* o *OUT*, y *GND* o *-*. De igual manera, siempre debemos prestar atención a la serigrafía impresa para no confundirnos al momento de realizar las conexiones correspondientes.
 
 ![Figura 10 - Pinout Módulo Sensor DHT11](./images/Figura10-PinoutMóduloSensorDHT11.jpg)  
 *Figura 10 - Pinout Módulo Sensor DHT11*
 
-Un ejemplo de conexión del *módulo sensor DHT11 (o DHT22)* a nuestra *RPico* se muestra en la Figura 10. Como se puede observar, la alimentación del sensor está tomada del pin *3V3* (pin físico 36) y *GND* (pin físico 38), mientras que los datos se leen usando el pin *GP28* como entrada (pin físico 34).
+Un ejemplo de conexión del *módulo sensor DHT11 (o DHT22)* a nuestra **RPico W** se muestra en la **Figura 11**. Como se puede observar, la alimentación del sensor está tomada del pin *3V3* (pin físico 36) y *GND* (pin físico 38), mientras que los datos se leen usando el pin *GP28* como entrada (pin físico 34).
 
 ![Figura 11 - Conexión Módulo Sensor DHT11](./images/Figura11-ConexiónMóduloSensorDHT11.jpg)  
 *Figura 11 - Conexión Módulo Sensor DHT11*
 
-## 6.3 Sensores DHT11 y DHT22: Transmisión de datos
+## 6.3 Sensores DHT11 y DHT22: Estructura interna y transmisión de datos
 
-Ambos sensores poseen en su estructura un conjunto de detectores de temperatura y humedad con una salida calibrada de señal en *formato digital*, gracias a que cuentan en un interior cuentan con un **Convertidor Analógico Digital (ADC)**, que se encarga de transformar las magnitudes analógicas en señales digitales. La entrega de la medición a otros circuitos (como nuestra *RPico*) se realiza mediante una *interfaz serie*. Recordemos, esto quiere decir que todos los datos van por una misma señal uno atrás del otro.
+Los sensores *DHT11* y *DHT22* están diseñados con componentes específicos para la medición de la temperatura y la humedad del aire ambiente. En su estructura interna, ambos incorporan un sensor de humedad capacitivo, que detecta los cambios en la capacitancia en función de la humedad ambiental, y un termistor de coeficiente de temperatura negativo (NTC), que mide la temperatura ambiente mediante la variación de su resistencia eléctrica en respuesta a los cambios de temperatura.
 
-Sin embargo, ambos sensores no utilizan un protocolo de comunicación estándar como **I2C** o *SPI* para la transmisión de datos. En lugar de ello, implementan su propio protocolo para comunicarse a través de un solo hilo (DATA) con otros dispositivos, que es debidamente detallado en la hoja de datos. Afortunadamente, es un protocolo simple y puede implementarse sin problemas utilizando los pines digitales de nuestra *RPico*.
+Además, ambos sensores están equipados con un **Convertidor Analógico a Digital (ADC)**, que se encarga de convertir las **señales analógicas** provenientes del sensor de humedad capacitivo y del termistor en **señales digitales**. Estas **señales digitales**, son luego transmitidas a través de un **protocolo de comunicación**, permitiendo que un microcontrolador pueda interpretar los datos de temperatura y humedad de manera efectiva.
 
-En resumen, podemos decir que, una vez realizado el proceso de conversión de analógico a digital, se establece un proceso de comunicación y sincronización entre la *RPico* y el sensor, en el cual este último envía una trama de datos de 40 bits (5 bytes) correspondientes a la información de humedad y temperatura como se muestra en la Figura 11.
+![Figura 12 - Estructura Interna del DHT11](./images/Figura12-EstructuraInternaDelDHT11.jpg)  
+*Figura 12 - Estructura Interna del DHT11*
 
-![Figura 12 - Formato de datos DHT11](./images/Figura12-FormatoDeDatosDHT11.jpg)  
-*Figura 12 - Formato de datos DHT11*
+La entrega de la medición a otros circuitos, como nuestra **RPico W**, se realiza mediante un **protocolo de comunicación serie**. Recordemos que esto implica que todos los datos se transmiten por una misma señal, uno detrás del otro.
+
+Sin embargo, ninguno de los dos sensores utiliza un **protocolo de comunicación serie estándar** como **I2C** o **SPI** para la transmisión de datos. En su lugar, implementan su propio protocolo para comunicarse con otros dispositivos a través de un solo pin de datos, detallado en los datasheets correspondientes. Afortunadamente, se trata de un protocolo simple que puede implementarse sin problemas utilizando los pines digitales de nuestra **RPico W**.
+
+--> ACÁ
+En resumen, podemos decir que, una vez realizado el proceso de conversión de analógico a digital, se establece un proceso de comunicación y sincronización entre la *RPico* y el sensor, en el cual este último envía una trama de datos de 40 bits (5 bytes) correspondientes a la información de humedad y temperatura como se muestra en la Figura 13.
+
+![Figura 13 - Formato de datos DHT11](./images/Figura13-FormatoDeDatosDHT11.jpg)  
+*Figura 13 - Formato de datos DHT11*
 
 Como vemos, estos datos se interpretan de la siguiente manera:
 
