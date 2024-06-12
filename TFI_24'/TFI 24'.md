@@ -90,10 +90,9 @@ Además, ambos sensores están equipados con un **Convertidor Analógico a Digit
 
 La entrega de la medición a otros circuitos, como nuestra **RPico W**, se realiza mediante un **protocolo de comunicación serie**. Recordemos que esto implica que todos los datos se transmiten por una misma señal, uno detrás del otro.
 
-Sin embargo, ninguno de los dos sensores utiliza un **protocolo de comunicación serie estándar** como **I2C** o **SPI** para la transmisión de datos. En su lugar, implementan su propio protocolo para comunicarse con otros dispositivos a través de un solo pin de datos, detallado en los datasheets correspondientes. Afortunadamente, se trata de un protocolo simple que puede implementarse sin problemas utilizando los pines digitales de nuestra **RPico W**.
+Sin embargo, ninguno de los dos sensores utiliza un **protocolo de comunicación serie estándar** como **I2C** o **SPI** para la transmisión de datos. En su lugar, implementan *su propio protocolo* para comunicarse con otros dispositivos a través de un solo pin de datos, detallado en los datasheets correspondientes. Afortunadamente, se trata de un protocolo simple que puede implementarse sin problemas utilizando los pines digitales de nuestra **RPico W**.
 
---> ACÁ
-En resumen, podemos decir que, una vez realizado el proceso de conversión de analógico a digital, se establece un proceso de comunicación y sincronización entre la *RPico* y el sensor, en el cual este último envía una trama de datos de 40 bits (5 bytes) correspondientes a la información de humedad y temperatura como se muestra en la Figura 13.
+Una vez que se completa la conversión analógica a digital, este protocolo establece la comunicación y sincronización entre la **RPico W** y el sensor. Durante esta etapa, el sensor transmite una trama de datos de 40 bits (5 bytes) que contiene la información de la humedad y la temperatura, como se ilustra en la **Figura 13**.
 
 ![Figura 13 - Formato de datos DHT11](./images/Figura13-FormatoDeDatosDHT11.jpg)  
 *Figura 13 - Formato de datos DHT11*
@@ -101,35 +100,38 @@ En resumen, podemos decir que, una vez realizado el proceso de conversión de an
 Como vemos, estos datos se interpretan de la siguiente manera:
 
 1. El primer byte que recibimos es la *parte entera* de la *humedad relativa*.
-2. El segundo byte es la *parte decimal* de la *humedad relativa*. En el caso que utilicemos el *DHT11*, este dato es siempre 0, ya que como describimos en la Figura 04, la resolución es del 1%. 
+2. El segundo byte es la *parte decimal* de la *humedad relativa*. En el caso que utilicemos el *DHT11*, este dato es siempre 0, ya que como describimos en la **Figura 05**, la resolución es del 1%. 
 3. El tercer byte es la *parte entera* de la temperatura.
-4. El cuarto byte es la *parte decimal* de la temperatura. En el caso que utilicemos el *DHT11*, este dato es siempre 0, ya que como describimos en la Figura 04, la resolución es de 1°C 
-5. El quinto byte es la suma de verificación o *checksum*, resultante de sumar todos los bytes anteriores.
+4. El cuarto byte es la *parte decimal* de la temperatura. En el caso que utilicemos el *DHT11*, este dato es siempre 0, ya que como describimos en la **Figura 05**, la resolución es de 1°C. 
+5. El quinto byte es la *suma de verificación* o *checksum*, resultante de sumar todos los bytes anteriores.
 
-Este último byte se utiliza para corroborar que no existan datos corruptos en una transmisión de datos. Si la información recibida es correcta, al sumar los cuatro primeros grupos de bytes, el resultado debe ser igual al quinto byte. Tomemos como ejemplo la Figura 12, donde nuestra *RPico* ha recibido una trama como la ilustrada allí.
+Este último byte se utiliza para corroborar que no existan datos corruptos en una transmisión de datos. Si la información recibida es correcta, al sumar los cuatro primeros grupos de bytes, el resultado debe ser igual al quinto byte. Tomemos como ejemplo la **Figura 14**, donde nuestra **RPico W** ha recibido una trama como la ilustrada allí.
 
-![Figura 13 - Ejemplo Trama de Datos DHT11](./images/Figura13-EjemploTramadeDatosDHT11.jpg)  
-*Figura 13 - Ejemplo Trama de Datos DHT11*
+![Figura 14 - Ejemplo Trama de Datos DHT11](./images/Figura14-EjemploTramadeDatosDHT11.jpg)  
+*Figura 14 - Ejemplo Trama de Datos DHT11*
 
-Como dijimos, sumando los cuatro primeros grupos de bytes, debemos obtener el quinto. Si nos centramos en la trama de la Figura 12, comprobaremos que el dato recibido es correcto, ya que:
+Como dijimos, sumando los cuatro primeros grupos de bytes, debemos obtener el quinto. Si nos centramos en la trama de la **Figura 14**, comprobaremos que el dato recibido es correcto, ya que:
 
 $\text{8 bits humedad + 8 bits humedad + 8 bits temperatura + 8 bits temperatura = 8 bits de checksum}$  
-$0011 0101 + 0000 0000 + 0001 1000 + 0000 0000 = 0100 1101$
+$\text{0011 0101 + 0000 0000 + 0001 1000 + 0000 0000 = 0100 1101}$
 
-Al recibir la trama de datos, la *RPico* se encargará de sumar los cuatro primeros grupos de bytes. Si el resultado es igual al byte de *checksum* recibido, tomará los datos como válidos. Caso contrario, los descartará y esperará una nueva trama. 
+Al recibir la trama de datos, la **RPico W** se encargará de sumar los cuatro primeros grupos de bytes. Si el resultado es igual al byte de *checksum* recibido, tomará los datos como válidos. Caso contrario, los descartará y esperará una nueva trama. 
 
-Si volvemos a la hoja de datos, además de la trama, observaremos también, que todo el proceso de transmisión implica respetar unos tiempos determinados de inicio y finalización de comunicación entre el el microcontrolador y el sensor. Como estarán deduciendo, llevar a cabo la programación desde cero de todo el proceso implicaría mucho trabajo. 
+Si volvemos a la hoja de datos, además de la trama de datos, observaremos que todo el proceso de transmisión requiere respetar unos tiempos específicos de inicio y finalización de la comunicación entre el microcontrolador y el sensor. Como podrán deducir, desarrollar la programación completa de este proceso desde cero implicaría mucho trabajo.
 
-Por suerte, la versión actual de **MicroPython** ya cuenta con librerías para este sensor, algo que nos permite ahorrar mucho tiempo de programación. Si queremos comprobar esto, nos situamos en la consola de Thonny con la *RPico* conectada y escribimos la instrucción *help("modules")* y veremos la librería *dht* correspondiente.
+Afortunadamente, el firmware actual de **MicroPython** ya incluye librerías para este sensor, lo que nos permite ahorrar mucho tiempo de programación y evita la necesidad de descargar librerías adicionales, como en el caso del display LCD. Para verificar las librerías estándar disponibles en nuestra versión del firmware de **MicroPython**, debemos situarnos en la consola de **Thonny** con la **RPico W** conectada y ejecutar la instrucción *help("modules")*. Allí encontraremos la librería *dht* que necesitamos para nuestro TFI.
 
-![Figura 14 - Librería dht en MicroPython](./images/Figura14-LibreríadhtenMicroPython.jpg)  
-*Figura 14 - Librería dht en MicroPython*
+![Figura 15 - Librería dht en MicroPython](./images/Figura15-LibreríadhtenMicroPython.jpg)  
+*Figura 15 - Librería dht en MicroPython*
 
 ## 6.4 TFI - Parte I: Puesta en marcha y lectura de valores
 
-En esta primera parte del *TFI* veremos como se lleva a cabo la lectura de los valores arrojados por el *módulo sensor DHT11*, utilizando para ello, la librería *dht*. Utilizaremos en este caso, la conexión realizada en la Figura 10. Por supuesto, ustedes pueden emplear los pines correspondientes que deseen.
+![Figura 16 - TFI - Parte I](./images/Figura16-TFIParteI.jpg)  
+*Figura 16 - TFI - Parte I*
 
-Y ahora a programar. Comencemos por conectar la *RPico* a nuestra computadora, ejecutar *Thonny* y hacer clic en el área de Script para cargar las librerías habituales, incorporando ahora la librería *dht*. Pero, como esta última está diseñada para los dos modelos del sensor DHT, importaremos únicamente la parte que posee todo lo necesario para manipular el *dht11*, quedando entonces:
+En esta primera parte del *TFI*, veremos cómo se realiza la lectura de los valores proporcionados por el *módulo sensor DHT11* utilizando la librería *dht*. Para ello, utilizaremos la conexión mostrada en la **Figura 11**.
+
+Y ahora, a programar. Comencemos por conectar la **RPico W** a nuestra computadora, ejecutar **Thonny** y hacer clic en el área de script para cargar las librerías habituales, incorporando ahora la librería *dht*. Sin embargo, dado que esta librería está diseñada para ambos modelos del sensor DHT, importaremos únicamente la parte necesaria para manipular el *DHT11*, quedando así:
 
 ```python
 from machine import Pin
@@ -137,7 +139,7 @@ from utime import sleep
 from dht import DHT11
 ```
 
-Luego, debemos definir un objeto *dht* para poder leer los datos que provienen de nuestro sensor. En él, debemos indicar que pin utilizaremos como *entrada digital* (en nuestro caso, el *GP28*). Recordemos que no es necesario activar la *Resistencia Pull_Up* interna de nuestra *RPico*, ya que estamos utilizando el *módulo sensor DHT11*, y este ya cuenta con una *Resistencia Pull_Up* física incorporada:
+Luego, debemos definir un objeto *dht* para poder leer los datos que provienen de nuestro sensor. En él, debemos indicar que pin utilizaremos como **entrada digital** (en nuestro caso, el *GP28*). Recordemos que no es necesario activar la *Resistencia Pull_Up* interna de nuestra **RPico W**, ya que estamos utilizando el *módulo sensor DHT11*, y este ya cuenta con una *Resistencia Pull_Up* física incorporada:
 
 ```python
 dht11_sensor = DHT11(Pin(28, Pin.IN))
@@ -150,7 +152,7 @@ temp = dht11_sensor.temperature()
 hum = dht11_sensor.humidity()
 ```
 
-Y ahora, debemos agregar un bucle que permita realizar esto de forma continua. Pero recordemos que el *DHT11* tiene un tiempo de respuesta de 1 segundo como se indicó en la Figura 04, entonces para respetar ese tiempo, agregaremos un delay levemente superior para garantizar la correcta lectura de los datos como se muestra a continuación: 
+Y ahora, debemos agregar un bucle que permita realizar esto de forma continua. Pero recordemos que el *DHT11* tiene un tiempo de respuesta de 1 segundo como se indicó en la **Figura 05**, entonces para respetar ese tiempo, agregaremos un delay levemente superior para garantizar la correcta lectura de los datos como se muestra a continuación: 
 
 ```python
 while True:
@@ -167,49 +169,68 @@ Para finalizar, se imprimen los valores obtenidos en la consola, utilizando la f
     print('Humedad Relativa: ',hum,'%')
     print() # Renglón en blanco 
 ```
-Cuando ejecutes el código (ver *Ejemplo16_TFI_LecturaDHT11.py* en el repositorio), verás un mensaje como el de la Figura 14.
 
-![Figura 15 - Lectura sensor DHT11](./images/Figura15-LecturaSensorDHT11.jpg)  
-*Figura 15 - Lectura sensor DHT11*
+El código queda de la siguiente manera (ver *Ejemplo16_TFI_LecturaDHT11.py* en el repositorio): 
 
-Puedes comprobar el correcto funcionamiento cambiando las condiciones del espacio próximo al sensor, siempre con el debido cuidado de no dañar ningún componente. Por ejemplo, acerca la boca de un termo con agua caliente en su interior, y notarás que el vapor que sale modificará ambos valores.
+```python
+from machine import Pin
+from utime import sleep
+from dht import DHT11
+
+dht11_sensor = DHT11(Pin(28, Pin.IN))
+
+while True:
+    sleep(2)
+    dht11_sensor.measure()
+    temp = dht11_sensor.temperature()
+    hum = dht11_sensor.humidity()
+    
+    print('Temperatura: ',temp,'°C')
+    print('Humedad Relativa: ',hum,'%')
+    print() # Renglón en blanco 
+```
+
+Cuando lo ejecutes, verás un mensaje similar al de la **Figura 17**.
+
+![Figura 17 - Lectura sensor DHT11](./images/Figura17-LecturaSensorDHT11.jpg)  
+*Figura 17 - Lectura sensor DHT11*
+
+Puedes comprobar el correcto funcionamiento del sensor cambiando las condiciones del entorno próximo al sensor, siempre con el debido cuidado de no dañar ningún componente. Por ejemplo, acerca la boca de un termo con agua caliente en su interior y notarás que el vapor que emite modificará ambos valores.
 
 ## 6.5 TFI - Parte II: Visualizar datos medidos (Actividad N°1)
 
-![Figura 16 - TFI - Parte II](./images/Figura16-TFIParteII.jpg)  
-*Figura 16 - TFI - Parte II*
+![Figura 18 - TFI - Parte II](./images/Figura18-TFIParteII.jpg)  
+*Figura 18 - TFI - Parte II*
 
 Ahora les toca a ustedes...
 
-Como primera actividad, deben incorporar el *display LCD1602* al circuito que realizaron en la Parte I, y visualizar allí los datos de temperatura y humedad relativa. Recuerden que disponen de 16 caracteres por renglón. El resultado debe ser como el de la Figura 16.
+Como primera actividad, deben incorporar el *display LCD1602* al circuito que realizaron en la *Parte I*, y visualizar allí los datos de temperatura y humedad relativa. Recuerden que disponen de 16 caracteres por renglón. El resultado debe ser como el que se muestra en la **Figura 19**.
 
-![Figura 17 - TFI - Parte II - Ejemplo](./images/Figura17-TFIParteIIEjemplo.jpg)  
-*Figura 17 - TFI - Parte II - Ejemplo*
+![Figura 19 - TFI - Parte II - Ejemplo](./images/Figura19-TFIParteIIEjemplo.jpg)  
+*Figura 19 - TFI - Parte II - Ejemplo*
 
 Importante: El símbolo de grados "°" es un caracter especial y se escribe en el display mediante la instrucción *lcd.putstr(chr(223))*.
 
 ## 6.7 TFI - Parte III: Actuar (Actividad N°2)
 
-En la segunda actividad, agregarán una función de alarma a su pequeña *estación meteorológica*, la cual se activará cuando se cumpla una determinada condición. Para lograr esto, deben añadir un componente adicional al circuito de la Actividad N°1, ya sea un *LED* para una alarma lumínica o el *módulo buzzer* para una alarma sonora. La elección de qué tipo de alarma implementar queda a su criterio.
+![Figura 20 - TFI - Parte III](./images/Figura20-TFIParteIII.jpg)  
+*Figura 20 - TFI - Parte III*
 
-La condición a cumplir es que se accione cuando la temperatura sea superior a 40[°C].
-
-¡Manos a la obra!
+En la segunda actividad, agregarán una función de alarma a su pequeña *estación meteorológica*, la cual se activará cuando se cumpla una determinada condición. Para lograr esto, deben añadir un componente adicional al circuito de la *Actividad N°1*, ya sea un *LED* para una alarma lumínica o el *módulo buzzer* para una alarma sonora. La elección del tipo de alarma a implementar queda a su criterio. La condición a cumplir es que la alarma se accione cuando la temperatura sea superior a 30[°C].
 
 ## 6.8 TFI - Parte IV: Almacenar (Actividad N°3)
 
-Por último, a su pequeña *estación meteorológica* le incorporarán una señal de alarma, que se accione cuando ocurra una determinada condición. Para ello, al circuito de la Actividad N°1, deben sumarle una alarma lumínica (*LED*) o sonora (*Zumbador*), queda a elección de ustedes cual implementar. 
+![Figura 21 - TFI - Parte IV](./images/Figura21-TFIParteIV.jpg)  
+*Figura 21 - TFI - Parte IV*
 
-La condición a cumplir es que se accione cuando la humedad relativa sea superior al 70%.
-
-¡Manos a la obra!
+Como tercera y última actividad, deberán almacenar en un archivo .txt la misma información que se muestra en el display LCD de la actividad N°1. De esta forma, toda la información monitoreada y visualizada también será almacenada en un archivo, permitiendo su posterior lectura y logrando así crear un pequeño data logger de variables meteorológicas.
 
 ## 6.9 Condiciones de entrega del TFI
 
 Para poder aprobar el *TFI*, la entrega debe contener todo lo realizado para resolver las actividades solicitadas, esto incluye:
 
-1. Foto del circuito implementado
-2. Código completo realizado
-3. Un video corto que demuestre el correcto funcionamiento de la *estación meteorológica*, donde se aprecie la visualización de los datos y el accionamiento de la alarma cuando se alcanza la condición fijada.
+1. Foto del circuito implementado.
+2. Código completo realizado.
+3. Un video corto que demuestre el correcto funcionamiento de la *estación meteorológica*, donde se aprecie la visualización de los datos, el accionamiento de la alarma cuando se alcanza la condición fijada y el almacenamiento del archivo de texto.
 
-Fecha máxima de entrega: XX/XX/24. Se atienden consultas de forma permanente por el canal de Discord #electrónica . Mail de entrega: savoieluciano@gmail.com
+Fecha máxima de entrega: 05/07/24. Se atienden consultas de forma permanente por el canal de Discord #electrónica . Mail de entrega: savoieluciano@gmail.com
